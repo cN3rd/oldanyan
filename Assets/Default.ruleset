@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="UnityDefaultAllEnabledWithExceptions" Description="Includes all rules by default, allowing .editorconfig to handle specific Unity exceptions and style." ToolsVersion="17.0">
+    <Include Path="allrules.ruleset" Action="Default" />
+</RuleSet>

@@ -1,0 +1,250 @@
+# Top-most EditorConfig file
+root = true
+
+# Apply to all files tracked by Git
+[*]
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true # Corresponds to roslynator_new_line_at_end_of_file = true
+
+# Specific settings for code/markup files
+[*.{appxmanifest,asax,ascx,aspx,axaml,build,c,c++,c++m,cc,ccm,cginc,compute,cp,cpp,cppm,cs,cshtml,cu,cuh,cxx,cxxm,dtd,fs,fsi,fsscript,fsx,fx,fxh,h,hh,hlsl,hlsli,hlslinc,hpp,hxx,inc,inl,ino,ipp,ixx,master,ml,mli,mpp,mq4,mq5,mqh,mxx,nuspec,paml,razor,resw,resx,shader,skin,tpp,usf,ush,uxml,xaml,xamlx,xoml,xsd,uss,asmdef,json,yaml,yml}]
+indent_style = space
+indent_size = 4
+tab_width = 4 # Corresponds to roslynator_tab_length = 4
+
+# ============================================================================
+# C# Specific Settings ([*.cs])
+# ============================================================================
+[*.cs]
+
+# ----------------------------------------------------------------------------
+# Formatting Rules (Layout Only - No Severity) - .NET Standard
+# ----------------------------------------------------------------------------
+csharp_new_line_before_open_brace = all
+csharp_new_line_before_else = true
+csharp_new_line_before_catch = true
+csharp_new_line_before_finally = true
+csharp_new_line_before_members_in_object_initializers = true
+csharp_new_line_before_members_in_anonymous_types = true
+csharp_new_line_between_query_expression_clauses = true
+
+csharp_indent_case_contents = true
+csharp_indent_switch_labels = true
+csharp_indent_labels = flush_left
+
+csharp_space_after_cast = false
+csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_between_method_declaration_parameter_list_parentheses = false
+csharp_space_between_method_call_parameter_list_parentheses = false
+csharp_space_between_parentheses = false
+
+csharp_preserve_single_line_statements = false
+csharp_preserve_single_line_blocks = true
+
+csharp_blank_lines_around_single_line_field = 0
+csharp_blank_lines_around_single_line_property = 0
+csharp_blank_lines_around_single_line_method = 0
+csharp_blank_lines_around_single_line_auto_property = 0
+csharp_blank_lines_around_local_method = 0
+csharp_blank_lines_before_single_line_comment = 0
+csharp_keep_blank_lines_in_declarations = 1
+csharp_keep_blank_lines_in_code = 1
+
+# ----------------------------------------------------------------------------
+# Code Style Preferences (Mostly Suggestions) - .NET Standard
+# ----------------------------------------------------------------------------
+# Modifier order
+csharp_preferred_modifier_order = public, private, protected, internal, static, extern, new, virtual, abstract, sealed, override, readonly, unsafe, volatile, async, file, required:suggestion
+
+# Use 'var' preferences (false = prefer explicit type for built-ins)
+csharp_style_var_for_built_in_types = false:suggestion
+# csharp_style_var_when_type_is_apparent = true:suggestion # Covered by roslynator_use_var
+# csharp_style_var_elsewhere = true:suggestion # Covered by roslynator_use_var
+
+# Predefined types (e.g., 'int' vs 'System.Int32')
+dotnet_style_predefined_type_for_locals_parameters_members = true:suggestion # RCS1013
+dotnet_style_predefined_type_for_member_access = true:suggestion
+
+# Qualification preferences ('this.' usage)
+dotnet_style_qualification_for_field = false:suggestion
+dotnet_style_qualification_for_property = false:suggestion
+dotnet_style_qualification_for_method = false:suggestion
+dotnet_style_qualification_for_event = false:suggestion
+
+# Expression-bodied members
+csharp_style_expression_bodied_methods = true:suggestion # RCS1016
+csharp_style_expression_bodied_constructors = true:suggestion # RCS1016
+csharp_style_expression_bodied_operators = true:suggestion # RCS1016
+csharp_style_expression_bodied_properties = true:suggestion # RCS1016
+csharp_style_expression_bodied_indexers = true:suggestion # RCS1016
+csharp_style_expression_bodied_accessors = true:suggestion # RCS1016
+
+# Pattern matching
+csharp_style_pattern_matching_over_is_with_cast_check = true:suggestion # RCS1220
+csharp_style_pattern_matching_over_as_with_null_check = true:suggestion # RCS1221
+csharp_style_prefer_switch_expression = true:suggestion
+csharp_style_pattern_local_over_anonymous_function = true:suggestion
+
+# Other style preferences
+csharp_style_prefer_utf8_string_literals = true:suggestion
+dotnet_style_parentheses_in_arithmetic_binary_operators = never_if_unnecessary:suggestion # RCS1032
+dotnet_style_parentheses_in_other_binary_operators = always_for_clarity:suggestion # RCS1123
+dotnet_style_parentheses_in_relational_binary_operators = always_for_clarity:suggestion # RCS1123
+csharp_style_inlined_variable_declaration = true:suggestion
+csharp_prefer_simple_default_expression = true:suggestion # RCS1244
+csharp_style_deconstructed_variable_declaration = true:suggestion
+csharp_style_throw_expression = true:suggestion
+csharp_style_conditional_delegate_call = true:suggestion # RCS1146
+csharp_style_unused_value_expression_statement_preference = discard_variable:suggestion # RCS1179
+csharp_style_unused_value_assignment_preference = discard_variable:suggestion # RCS1179
+csharp_style_prefer_index_operator = true:suggestion # RCS1195
+csharp_style_prefer_range_operator = true:suggestion
+
+# Code Style Preferences (Enforced as Warnings) - .NET Standard
+dotnet_style_require_accessibility_modifiers = for_non_interface_members:warning # RCS1018
+csharp_prefer_braces = true:warning # RCS1007, RCS1126
+
+# ----------------------------------------------------------------------------
+# Roslynator Specific Options (Formatting/Style)
+# ----------------------------------------------------------------------------
+roslynator_accessibility_modifiers = explicit # Match dotnet_style_require_accessibility_modifiers
+roslynator_accessor_braces_style = multi_line
+roslynator_array_creation_type_style = implicit_when_type_is_obvious
+roslynator_arrow_token_new_line = after
+roslynator_binary_operator_new_line = after
+roslynator_blank_line_after_file_scoped_namespace_declaration = true
+roslynator_blank_line_between_closing_brace_and_switch_section = false # Let standard rules handle this
+roslynator_blank_line_between_single_line_accessors = false # Let standard rules handle this
+roslynator_blank_line_between_switch_sections = omit_after_block
+roslynator_blank_line_between_using_directives = separate_groups # RCS0015
+roslynator_block_braces_style = multi_line # RCS0021
+roslynator_body_style = expression # Match csharp_style_expression_bodied_*
+roslynator_conditional_operator_condition_parentheses_style = omit_when_condition_is_single_token # RCS1051
+roslynator_conditional_operator_new_line = before # Preference for readability
+roslynator_configure_await = false # Generally safer default, though less common in Unity core logic
+roslynator_doc_comment_summary_style = multi_line # RCS1253
+roslynator_empty_string_style = literal # Prefer "" over string.Empty (RCS1078)
+roslynator_enum_flag_value_style = decimal_number # RCS1254
+roslynator_enum_has_flag_style = method # Prefer HasFlag over bitwise ops (RCS1096)
+roslynator_equals_token_new_line = after
+roslynator_infinite_loop_style = while # Prefer while(true) over for(;;) (RCS1252)
+# roslynator_max_line_length = 140 # Optional: If you want Roslynator's line length check (RCS0056)
+roslynator_new_line_before_while_in_do_statement = false # RCS0051
+roslynator_null_check_style = pattern_matching # Prefer 'is null' / 'is not null' (RCS1248)
+roslynator_null_conditional_operator_new_line = before # Preference for readability
+roslynator_object_creation_parentheses_style = omit # Prefer new() over new Class() (RCS1050)
+roslynator_object_creation_type_style = implicit_when_type_is_obvious # RCS1250
+roslynator_prefix_field_identifier_with_underscore = true # Align with naming convention below
+roslynator_trailing_comma_style = omit_when_single_line # RCS1260
+roslynator_unity_code_analysis.enabled = true # Enable Roslynator's Unity-specific checks
+roslynator_use_anonymous_function_or_method_group = method_group # Prefer method groups (RCS1207)
+roslynator_use_block_body_when_declaration_spans_over_multiple_lines = false # Let csharp_style_expression_bodied_* control this
+roslynator_use_block_body_when_expression_spans_over_multiple_lines = true # Prefer block if expression body is multi-line
+roslynator_use_collection_expression = true # Prefer collection expressions where possible
+roslynator_use_var = when_type_is_obvious # Use var when obvious (RCS1264)
+roslynator_use_var_instead_of_implicit_object_creation = true # Prefer 'var x = new()' over 'Class x = new()' (RCS1250)
+
+# Enable Roslynator Refactorings and Compiler Fixes (Optional but Recommended)
+roslynator_refactorings.enabled = true
+roslynator_compiler_diagnostic_fixes.enabled = true
+
+# ----------------------------------------------------------------------------
+# Naming Conventions (Enforced as Warnings)
+# ----------------------------------------------------------------------------
+
+# Naming Styles
+dotnet_naming_style.pascal_case_style.capitalization = pascal_case
+
+dotnet_naming_style.camel_case_style.capitalization = camel_case
+
+dotnet_naming_style.private_or_protected_field_style.capitalization = camel_case
+dotnet_naming_style.private_or_protected_field_style.required_prefix = _ # Matches roslynator_prefix_field_identifier_with_underscore = true
+
+# Symbol Groups
+dotnet_naming_symbols.classes_structs_interfaces_enums_delegates.applicable_kinds = class, struct, interface, enum, delegate
+dotnet_naming_symbols.classes_structs_interfaces_enums_delegates.applicable_accessibilities = *
+
+dotnet_naming_symbols.methods.applicable_kinds = method
+dotnet_naming_symbols.methods.applicable_accessibilities = *
+
+dotnet_naming_symbols.properties_events.applicable_kinds = property, event
+dotnet_naming_symbols.properties_events.applicable_accessibilities = *
+
+# Public/Internal fields often use camelCase in Unity (e.g., for [SerializeField])
+dotnet_naming_symbols.public_or_internal_fields.applicable_kinds = field
+dotnet_naming_symbols.public_or_internal_fields.applicable_accessibilities = public, internal
+
+# Private/Protected fields use _camelCase
+dotnet_naming_symbols.private_or_protected_fields.applicable_kinds = field
+dotnet_naming_symbols.private_or_protected_fields.applicable_accessibilities = private, protected
+
+dotnet_naming_symbols.constants.applicable_kinds = field, local
+dotnet_naming_symbols.constants.required_modifiers = const
+
+dotnet_naming_symbols.locals.applicable_kinds = local
+dotnet_naming_symbols.locals.required_modifiers =
+
+dotnet_naming_symbols.parameters.applicable_kinds = parameter
+
+# Naming Rules (Linking Symbols to Styles)
+dotnet_naming_rule.types_should_be_pascal_case.symbols = classes_structs_interfaces_enums_delegates
+dotnet_naming_rule.types_should_be_pascal_case.style = pascal_case_style
+dotnet_naming_rule.types_should_be_pascal_case.severity = warning
+
+dotnet_naming_rule.methods_should_be_pascal_case.symbols = methods
+dotnet_naming_rule.methods_should_be_pascal_case.style = pascal_case_style
+dotnet_naming_rule.methods_should_be_pascal_case.severity = warning
+
+dotnet_naming_rule.properties_events_should_be_pascal_case.symbols = properties_events
+dotnet_naming_rule.properties_events_should_be_pascal_case.style = pascal_case_style
+dotnet_naming_rule.properties_events_should_be_pascal_case.severity = warning
+
+# Enforce camelCase for public/internal fields (Common Unity Style)
+dotnet_naming_rule.public_or_internal_fields_should_be_camel_case.symbols = public_or_internal_fields
+dotnet_naming_rule.public_or_internal_fields_should_be_camel_case.style = camel_case_style
+dotnet_naming_rule.public_or_internal_fields_should_be_camel_case.severity = warning
+
+# Enforce _camelCase for private/protected fields
+dotnet_naming_rule.private_or_protected_fields_should_be_private_or_protected_field_style.symbols = private_or_protected_fields
+dotnet_naming_rule.private_or_protected_fields_should_be_private_or_protected_field_style.style = private_or_protected_field_style
+dotnet_naming_rule.private_or_protected_fields_should_be_private_or_protected_field_style.severity = warning
+
+dotnet_naming_rule.constants_should_be_pascal_case.symbols = constants
+dotnet_naming_rule.constants_should_be_pascal_case.style = pascal_case_style
+dotnet_naming_rule.constants_should_be_pascal_case.severity = warning
+
+dotnet_naming_rule.locals_should_be_camel_case.symbols = locals
+dotnet_naming_rule.locals_should_be_camel_case.style = camel_case_style
+dotnet_naming_rule.locals_should_be_camel_case.severity = warning
+
+dotnet_naming_rule.parameters_should_be_camel_case.symbols = parameters
+dotnet_naming_rule.parameters_should_be_camel_case.style = camel_case_style
+dotnet_naming_rule.parameters_should_be_camel_case.severity = warning
+
+# ----------------------------------------------------------------------------
+# Diagnostic Severity Overrides
+# ----------------------------------------------------------------------------
+
+# --- CRITICAL UNITY EXCEPTIONS ---
+# These MUST be disabled ('none') to prevent false positives with standard
+# Unity patterns like [SerializeField] and Unity message methods (Update, etc.).
+# .editorconfig overrides take precedence over rulesets.
+dotnet_diagnostic.CS0649.severity = none  # Field '...' is never assigned to...
+dotnet_diagnostic.IDE0051.severity = none # Private member '...' is unused
+dotnet_diagnostic.IDE0044.severity = none # Make field readonly (Conflicts with [SerializeField])
+dotnet_diagnostic.RCS1169.severity = none # Make field readonly (Roslynator version, conflicts with [SerializeField])
+dotnet_diagnostic.RCS1213.severity = none # Remove unused member (Roslynator version, conflicts with Unity messages)
+
+# ============================================================================
+# Settings for Other File Types
+# ============================================================================
+[*.{yaml,yml}]
+indent_size = 2 # Common YAML indent
+
+[*.uss]
+indent_size = 2 # Common CSS/USS indent
+
+[*.asmdef]
+indent_size = 2 # Common JSON indent
