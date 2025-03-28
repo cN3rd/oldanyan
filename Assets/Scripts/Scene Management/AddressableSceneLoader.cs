@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Eflatun.SceneReference;
 using UnityEngine;
@@ -54,6 +55,14 @@ namespace Game.SceneManagement
             _sceneInstances.Add(sceneRef.Guid, handle.Result);
         }
 
+        public async Awaitable UnloadAllAddedScenes()
+        {
+            foreach (var sceneGuid in _sceneInstances.Keys)
+            {
+                await UnloadAddressableScene(new SceneReference(sceneGuid));
+            }
+        }
+
         /// <summary>
         /// Unloads an addressable scene
         /// </summary>
@@ -95,7 +104,7 @@ namespace Game.SceneManagement
         private async Awaitable TrackProgress(AsyncOperationHandle<SceneInstance> handle,
             [System.Diagnostics.CodeAnalysis.NotNull] IProgress<float> progressReport)
         {
-            float lastProgress = 0;
+            float lastProgress = -1;
             while (!handle.IsDone)
             {
                 // only report on progress changes
@@ -106,7 +115,7 @@ namespace Game.SceneManagement
                     lastProgress = currentProgress;
                 }
 
-                await Awaitable.NextFrameAsync();
+                await Awaitable.EndOfFrameAsync();
             }
 
             // Ensure the final progress (1.0) is reported

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Game.Data;
 using LitMotion;
@@ -11,28 +12,36 @@ namespace Game.UI
     [RequireComponent(typeof(CanvasGroup))]
     public class LoadingScreenUI : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI tipText;
         [SerializeField] private Slider progressSlider;
         [SerializeField] private CanvasGroup canvasGroup;
+
+        [Header("Tips Display")]
         [SerializeField] private GameTips tipsCollection;
+        [SerializeField] private CanvasGroup tipTextCanvasGroup;
+        [SerializeField] private TextMeshProUGUI tipText;
+
         private int _currentTipIndex;
         private Coroutine _tipsCoroutine;
 
         private void Start() => Show();
 
-        private void Show()
+        public void Show()
         {
             canvasGroup.alpha = 1;
             _tipsCoroutine = StartCoroutine(CycleTipsCoroutine());
         }
 
-        private void Hide()
+        public void Hide()
         {
             canvasGroup.alpha = 0;
             StopCoroutine(_tipsCoroutine);
         }
 
-        public void UpdateProgress(float progress) => progressSlider.value = progress;
+        public void UpdateProgress(float progress)
+        {
+            Debug.Log($"Progress: {progress*100}%");
+            progressSlider.value = progress;
+        }
 
         private IEnumerator CycleTipsCoroutine()
         {
@@ -43,9 +52,9 @@ namespace Game.UI
 
                 // awaits the entire duration of the animation
                 var sequence = LSequence.Create()
-                    .Append(LMotion.Create(Color.clear, Color.white, 1).BindToColor(tipText))
+                    .Append(LMotion.Create(0f, 1f, 1).BindToAlpha(tipTextCanvasGroup))
                     .AppendInterval(TipDisplayTime)
-                    .Append(LMotion.Create(Color.white, Color.clear, 1).BindToColor(tipText));
+                    .Append(LMotion.Create(1f, 0f, 1).BindToAlpha(tipTextCanvasGroup));
 
                 yield return sequence.Run().ToYieldInstruction();
 
