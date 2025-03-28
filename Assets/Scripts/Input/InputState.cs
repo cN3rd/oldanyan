@@ -61,14 +61,11 @@ namespace Game.Input
         private void LookAction(InputAction.CallbackContext context) =>
             CurrentLook = SafelyReadInput<Vector2>(context);
 
-        private void MoveAction(InputAction.CallbackContext context)
-        {
-            var value = SafelyReadInput<Vector2>(context);
-            Debug.Log($"Move: {context.phase}, value: {value}");
-            CurrentMove = value;
-        }
+        private void MoveAction(InputAction.CallbackContext context) =>
+            CurrentMove = SafelyReadInput<Vector2>(context);
 
-        private TValue SafelyReadInput<TValue>(InputAction.CallbackContext context) where TValue : struct =>
+        private TValue SafelyReadInput<TValue>(InputAction.CallbackContext context)
+            where TValue : struct =>
             context.phase == InputActionPhase.Canceled ? default : context.ReadValue<TValue>();
     }
 }

@@ -16,6 +16,7 @@ namespace Game
         [Header("Movement Controls")]
         [SerializeField] private float maxSpeed = 5f;
         [SerializeField] private float acceleration = 15f;
+        [SerializeField] private float deceleration = 25f;
         [SerializeField] private float sprintMultiplier = 2f;
         [SerializeField] private float jumpForce = 5f;
 
@@ -44,8 +45,20 @@ namespace Game
             var currentMove = inputState.CurrentMove;
             if (currentMove.sqrMagnitude < MovementThreshold)
             {
+                // Apply deceleration when no input is detected
+                _horizontalVelocity.x = rb.linearVelocity.x;
+                _horizontalVelocity.z = rb.linearVelocity.z;
+
+                if (_horizontalVelocity.sqrMagnitude > 0.01f)
+                {
+                    // Calculate deceleration direction (opposite of current movement)
+                    Vector3 decelDirection = -_horizontalVelocity.normalized;
+                    rb.AddForce(decelDirection * deceleration, ForceMode.Acceleration);
+                }
                 return;
             }
+
+            Debug.Log(currentMove);
 
             // Calculate move direction in world space
             _moveDirection.x = playerPivotTransform.right.x * currentMove.x +

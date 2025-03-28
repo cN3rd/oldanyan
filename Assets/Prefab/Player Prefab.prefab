@@ -202,7 +202,7 @@ MonoBehaviour:
   playerPivotTransform: {fileID: 5572416417755807482}
   inputState: {fileID: 584624075065691294}
   maxSpeed: 5
-  acceleration: 50
+  acceleration: 15
   sprintMultiplier: 2
   jumpForce: 5
   groundLayer:
