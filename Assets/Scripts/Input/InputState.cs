@@ -59,9 +59,16 @@ namespace Game.Input
             context.phase is InputActionPhase.Started or InputActionPhase.Performed;
 
         private void LookAction(InputAction.CallbackContext context) =>
-            CurrentLook = context.ReadValue<Vector2>();
+            CurrentLook = SafelyReadInput<Vector2>(context);
 
-        private void MoveAction(InputAction.CallbackContext context) =>
-            CurrentMove = context.ReadValue<Vector2>();
+        private void MoveAction(InputAction.CallbackContext context)
+        {
+            var value = SafelyReadInput<Vector2>(context);
+            Debug.Log($"Move: {context.phase}, value: {value}");
+            CurrentMove = value;
+        }
+
+        private TValue SafelyReadInput<TValue>(InputAction.CallbackContext context) where TValue : struct =>
+            context.phase == InputActionPhase.Canceled ? default : context.ReadValue<TValue>();
     }
 }
