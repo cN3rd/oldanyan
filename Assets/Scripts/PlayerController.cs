@@ -10,6 +10,7 @@ namespace Game
         [SerializeField] private Rigidbody rb;
         [SerializeField] private Collider playerCollider;
         [SerializeField] private Transform cameraTransform;
+        [SerializeField] private Transform playerPivotTransform;
         [SerializeField] private InputState inputState;
 
         [Header("Movement Controls")]
@@ -28,6 +29,16 @@ namespace Game
 
         private void FixedUpdate() => DoMovement();
 
+        private void LateUpdate()
+        {
+            DoLook();
+            UpdateCameraPosition();
+        }
+
+        private void OnEnable() => inputState.OnJump += DoJump;
+
+        private void OnDisable() => inputState.OnJump -= DoJump;
+
         private void DoMovement()
         {
             var currentMove = inputState.CurrentMove;
@@ -37,11 +48,11 @@ namespace Game
             }
 
             // Calculate move direction in world space
-            _moveDirection.x = cameraTransform.right.x * currentMove.x +
-                               cameraTransform.forward.x * currentMove.y;
+            _moveDirection.x = playerPivotTransform.right.x * currentMove.x +
+                               playerPivotTransform.forward.x * currentMove.y;
 
-            _moveDirection.z = cameraTransform.right.z * currentMove.x +
-                               cameraTransform.forward.z * currentMove.y;
+            _moveDirection.z = playerPivotTransform.right.z * currentMove.x +
+                               playerPivotTransform.forward.z * currentMove.y;
 
             _moveDirection.y = 0;
 
@@ -65,18 +76,27 @@ namespace Game
             float currentSpeedSquared = _horizontalVelocity.x * _horizontalVelocity.x +
                                         _horizontalVelocity.z * _horizontalVelocity.z;
 
-            if (currentSpeedSquared > effectiveMaxSpeedSquared)
+            if (currentSpeedSquared <= effectiveMaxSpeedSquared)
             {
-                float speedFactor = effectiveMaxSpeed / Mathf.Sqrt(currentSpeedSquared);
-                rb.linearVelocity = new Vector3(
-                    _horizontalVelocity.x * speedFactor,
-                    rb.linearVelocity.y,
-                    _horizontalVelocity.z * speedFactor
-                );
+                return;
             }
+
+            // Limit speed
+            float speedFactor = effectiveMaxSpeed / Mathf.Sqrt(currentSpeedSquared);
+            rb.linearVelocity = new Vector3(
+                _horizontalVelocity.x * speedFactor,
+                rb.linearVelocity.y,
+                _horizontalVelocity.z * speedFactor
+            );
         }
 
-        private void LateUpdate()
+        private void UpdateCameraPosition()
+        {
+            playerPivotTransform.GetPositionAndRotation(out Vector3 position, out Quaternion rotation);
+            cameraTransform.SetPositionAndRotation(position, rotation);
+        }
+
+        private void DoLook()
         {
             var currentLook = inputState.CurrentLook;
             if (currentLook.sqrMagnitude < MovementThreshold)
@@ -87,13 +107,9 @@ namespace Game
             _pitch = Mathf.Clamp(_pitch + currentLook.y, -90f, 90f);
             _yaw = (_yaw + currentLook.x) % 360f; // Allow full 360° rotation
 
-            cameraTransform.localRotation = Quaternion.Euler(_pitch, 0, 0);
+            playerPivotTransform.localRotation = Quaternion.Euler(_pitch, 0, 0);
             transform.localRotation = Quaternion.Euler(0, _yaw, 0);
         }
-
-        private void OnEnable() => inputState.OnJump += DoJump;
-
-        private void OnDisable() => inputState.OnJump -= DoJump;
 
         private void DoJump()
         {
