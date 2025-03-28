@@ -39,6 +39,11 @@ namespace Game
             await LoadScene(initialScene);
         }
 
+        private async void LoadLevel()
+        {
+
+        }
+
         private async Awaitable LoadScene(SceneReference scene)
         {
             loadingScreenUI.Show();
