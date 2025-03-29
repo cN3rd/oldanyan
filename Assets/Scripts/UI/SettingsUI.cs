@@ -41,6 +41,8 @@ namespace Game.UI
         private Dictionary<string, FullScreenMode> _fullscreenModes;
         private Resolution[] _resolutions;
 
+        public event Action OnBackButtonClicked;
+
         private void Awake()
         {
             InitializeResolutionsDropdown();
@@ -85,7 +87,11 @@ namespace Game.UI
             backButton.onClick.AddListener(OnBackClicked);
         }
 
-        private void OnBackClicked() => Hide();
+        private void OnBackClicked()
+        {
+            OnBackButtonClicked?.Invoke();
+            Hide();
+        }
 
         private void InitializeResolutionsDropdown()
         {

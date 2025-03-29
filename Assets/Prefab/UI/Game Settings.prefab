@@ -2102,6 +2102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 2604748091221839308}
+  initialSelectable: {fileID: 4937053852989416484}
   preferencesApplier: {fileID: 0}
   backButton: {fileID: 4937053852989416484}
   resolutionDropdown: {fileID: 4545651748529482201}

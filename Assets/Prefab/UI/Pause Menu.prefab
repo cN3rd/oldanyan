@@ -204,10 +204,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 6124868298517123692}
+  initialSelectable: {fileID: 3812787256078451156}
   resumeButton: {fileID: 3812787256078451156}
   restartButton: {fileID: 80195998288706472}
   settingsButton: {fileID: 3763423187083739057}
   mainMenuButton: {fileID: 3499089666895347440}
+  settingsUI: {fileID: 0}
 --- !u!224 &4856500633716287071 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7831098579274478839, guid: 8f4b9ccac857c05448b86b525b14f472, type: 3}
