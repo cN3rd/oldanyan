@@ -24,7 +24,7 @@ namespace Game.SceneManagement
             loadingScreenUI.Hide();
         }
 
-        void Awake() => _reporter = new LoadingUIReporter(loadingScreenUI);
+        private void Awake() => _reporter = new LoadingUIReporter(loadingScreenUI);
 
         public SceneReference GetInitialScene()
         {

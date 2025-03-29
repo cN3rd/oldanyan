@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Game.Data
 {
@@ -6,7 +7,7 @@ namespace Game.Data
     public class GameSave
     {
         [Serializable]
-        public class CheckpointData
+        public struct CheckpointData
         {
             public string sceneGuid;
             public int id;

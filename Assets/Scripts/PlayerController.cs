@@ -1,4 +1,6 @@
+using System;
 using Game.Input;
+using Game.UI;
 using UnityEngine;
 
 namespace Game
@@ -11,8 +13,8 @@ namespace Game
         [SerializeField] private Collider playerCollider;
         [SerializeField] private Transform cameraTransform;
         [SerializeField] private Transform playerPivotTransform;
-        [SerializeField] private InputState inputState;
         [SerializeField] private Animator characterAnimator;
+        [SerializeField] private InputState inputState;
 
         [Header("Movement Controls")]
         [SerializeField] private float maxSpeed = 5f;

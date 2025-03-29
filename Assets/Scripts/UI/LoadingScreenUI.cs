@@ -21,7 +21,7 @@ namespace Game.UI
         private int _currentTipIndex;
         private Coroutine _tipsCoroutine;
 
-        private void Start() => Show();
+        private void Start() => Hide();
 
         public override void Show()
         {
@@ -32,7 +32,10 @@ namespace Game.UI
         public override void Hide()
         {
             base.Hide();
-            StopCoroutine(_tipsCoroutine);
+            if(_tipsCoroutine != null)
+            {
+                StopCoroutine(_tipsCoroutine);
+            }
         }
 
         public void UpdateProgress(float progress)

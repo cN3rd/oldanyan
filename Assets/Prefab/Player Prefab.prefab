@@ -147,6 +147,8 @@ MonoBehaviour:
   cameraTransform: {fileID: 0}
   playerPivotTransform: {fileID: 5572416417755807482}
   inputState: {fileID: 584624075065691294}
+  characterAnimator: {fileID: 8261819118273683854}
+  pauseMenuUI: {fileID: 0}
   maxSpeed: 5
   acceleration: 15
   deceleration: 25
@@ -224,5 +226,10 @@ PrefabInstance:
 --- !u!4 &2614282836605549556 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 95f7f5aa9cee31b4e9786a516b9b336a, type: 3}
+  m_PrefabInstance: {fileID: 2579846937372744735}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8261819118273683854 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 95f7f5aa9cee31b4e9786a516b9b336a, type: 3}
   m_PrefabInstance: {fileID: 2579846937372744735}
   m_PrefabAsset: {fileID: 0}

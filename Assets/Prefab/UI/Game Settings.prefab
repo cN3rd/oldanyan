@@ -997,6 +997,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 458120407299461295, guid: 1bc37de03859b554f86f637359fc859d, type: 3}
   m_PrefabInstance: {fileID: 3682703911875034707}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4937053852989416484 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8617752100491287159, guid: 1bc37de03859b554f86f637359fc859d, type: 3}
+  m_PrefabInstance: {fileID: 3682703911875034707}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4808251776659968338
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1962,7 +1973,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2669088369518000801, guid: 8f4b9ccac857c05448b86b525b14f472, type: 3}
       propertyPath: m_Name
-      value: Game Settings Variant
+      value: Game Settings
       objectReference: {fileID: 0}
     - target: {fileID: 2669088369518000801, guid: 8f4b9ccac857c05448b86b525b14f472, type: 3}
       propertyPath: m_IsActive
@@ -2048,6 +2059,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8878706438764806340, guid: 8f4b9ccac857c05448b86b525b14f472, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -2088,6 +2103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 2604748091221839308}
   preferencesApplier: {fileID: 0}
+  backButton: {fileID: 4937053852989416484}
   resolutionDropdown: {fileID: 4545651748529482201}
   windowingModeDropdown: {fileID: 7412272869566773207}
   vsyncToggle: {fileID: 7722286193303497602}

@@ -4,11 +4,11 @@ using Game.Data;
 
 namespace Game.Core
 {
-    public class GameSaveManager
+    public class GameSaveWrapper
     {
         private readonly string _savePath;
 
-        private GameSaveManager(GameSave save, string savePath)
+        private GameSaveWrapper(GameSave save, string savePath)
         {
             ActualSave = save;
             _savePath = savePath;
@@ -16,7 +16,7 @@ namespace Game.Core
 
         public GameSave ActualSave { get; }
 
-        public static GameSaveManager FromSaveSlot(int slot = 0)
+        public static GameSaveWrapper FromSaveSlot(int slot = 0)
         {
             string savePath = $"{Application.persistentDataPath}/gamesave_{slot}.save";
             GameSave save = null;
@@ -27,7 +27,14 @@ namespace Game.Core
             }
 
             save ??= new GameSave();
-            return new GameSaveManager(save, savePath);
+            return new GameSaveWrapper(save, savePath);
+        }
+
+        public static GameSaveWrapper CreateNewGame()
+        {
+            int slot = GamePreferencesManager.Instance.Preferences.lastUsedSlot++;
+            GamePreferencesManager.Instance.UpdateGamePreferences();
+            return FromSaveSlot(slot);
         }
 
         public void SaveGame() => File.WriteAllText(_savePath, JsonUtility.ToJson(ActualSave));

@@ -26,9 +26,6 @@ namespace Game.Core
             _preferences = JsonUtility.FromJson<GamePreferences>(prefsData) ?? new GamePreferences();
         }
 
-        public GameSaveManager GetManagerForCurrentSave() =>
-            GameSaveManager.FromSaveSlot(_preferences.lastUsedSlot);
-
         public void UpdateGamePreferences() =>
             File.WriteAllText(_prefsPath, JsonUtility.ToJson(_preferences));
     }

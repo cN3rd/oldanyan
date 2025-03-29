@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using Eflatun.SceneReference;
 using Game.Core;
-using Game.Data;
+using Game.Input;
 using Game.SceneManagement;
+using Game.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,20 +14,50 @@ namespace Game
     {
         [SerializeField] private List<CheckpointComponent> checkpoints = new();
         [SerializeField] private PlayerController player;
+        [SerializeField] private PauseMenuUI pauseMenuUI;
+        [SerializeField] private InputState inputState;
 
         // Reference to the scene guid of the current level, used in the scene-loading mechanism
+        // Automatically set by OnValidate
         [HideInInspector] [SerializeField] private string sceneGuid;
-
-        private GameSaveManager _gameSaveManager;
         private readonly Dictionary<CheckpointComponent, int> _checkpointToIndex = new();
 
+        private GameSaveWrapper _gameSaveWrapper;
+
         private void Awake() =>
-            _gameSaveManager = GamePreferencesManager.Instance.GetManagerForCurrentSave();
+            // This will contain the right data always:
+            //  - On new games, this will be a brand-new save (checkpoint 0 is always our beginning point)
+            //  - On loaded games, this will be the relevant save
+            _gameSaveWrapper =
+                GameSaveWrapper.FromSaveSlot(GamePreferencesManager.Instance.Preferences.lastUsedSlot);
 
         private void Start()
         {
+            SetupEvents();
             BuildCheckpointIndex();
             LoadLastCheckpoint();
+        }
+
+        private void OnDestroy()
+        {
+            foreach (var checkpoint in checkpoints)
+            {
+                checkpoint.OnCheckpointPassed -= CheckpointPassed;
+            }
+
+            RemoveEvents();
+        }
+
+        private void SetupEvents()
+        {
+            inputState.OnPauseGame += PauseGame;
+            pauseMenuUI.OnResumeGame += ResumeGame;
+        }
+
+        private void RemoveEvents()
+        {
+            inputState.OnPauseGame -= PauseGame;
+            pauseMenuUI.OnResumeGame -= ResumeGame;
         }
 
         private void BuildCheckpointIndex()
@@ -41,14 +72,6 @@ namespace Game
             }
         }
 
-        private void OnDestroy()
-        {
-            foreach (var checkpoint in checkpoints)
-            {
-                checkpoint.OnCheckpointPassed -= CheckpointPassed;
-            }
-        }
-
         private void CheckpointPassed(CheckpointComponent checkpoint)
         {
             if (!_checkpointToIndex.TryGetValue(checkpoint, out int checkpointIndex))
@@ -57,25 +80,35 @@ namespace Game
                 return;
             }
 
-            int savedCheckpointIndex = _gameSaveManager.ActualSave.currentCheckpoint?.id ?? 0;
+            int savedCheckpointIndex = _gameSaveWrapper.ActualSave.currentCheckpoint.id;
             if (checkpointIndex < savedCheckpointIndex)
             {
                 return;
             }
 
-            _gameSaveManager.ActualSave.currentCheckpoint = new()
-            {
-                id = checkpointIndex, sceneGuid = sceneGuid
-            };
+            _gameSaveWrapper.ActualSave.currentCheckpoint.id = checkpointIndex;
+            _gameSaveWrapper.ActualSave.currentCheckpoint.sceneGuid = sceneGuid;
+            _gameSaveWrapper.SaveGame();
 
-            _gameSaveManager.SaveGame();
+            if (checkpoints.Count == checkpointIndex + 1)
+            {
+                GameManager.Instance.AllCheckpointsComplete();
+            }
         }
 
         private void LoadLastCheckpoint()
         {
-            var checkpoint = checkpoints[_gameSaveManager.ActualSave.currentCheckpoint?.id ?? 0];
+            var checkpoint = checkpoints[_gameSaveWrapper.ActualSave.currentCheckpoint.id];
             player.transform.position = checkpoint.transform.position;
         }
+
+        private void PauseGame()
+        {
+            pauseMenuUI.Show();
+            inputState.BlockPlayerInput();
+        }
+
+        private void ResumeGame() => inputState.UnblockPlayerInput();
 
 #if UNITY_EDITOR
         private void OnValidate()
@@ -109,11 +142,14 @@ namespace Game
                 FindObjectsByType<CheckpointComponent>(
                     FindObjectsInactive.Exclude,
                     FindObjectsSortMode.InstanceID));
+
             allCheckpoints.ExceptWith(existingCheckpoints);
 
             checkpoints.AddRange(allCheckpoints);
 
-            Debug.Log(allCheckpoints.Count > 0 ? $"{allCheckpoints.Count} new checkpoints added" : "No new checkpoints found");
+            Debug.Log(allCheckpoints.Count > 0
+                ? $"{allCheckpoints.Count} new checkpoints added"
+                : "No new checkpoints found");
         }
 
         [ContextMenu("Update scene GUID")]

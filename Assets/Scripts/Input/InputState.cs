@@ -15,6 +15,9 @@ namespace Game.Input
 
         public void Awake() => _actions = new InputSystemActions();
 
+        public void BlockPlayerInput() => _actions.Player.Disable();
+        public void UnblockPlayerInput() => _actions.Player.Enable();
+
         public void OnEnable()
         {
             _actions.Enable();
@@ -31,6 +34,7 @@ namespace Game.Input
             _actions.Player.Sprint.canceled += SprintAction;
 
             _actions.Player.Jump.performed += JumpAction;
+            _actions.Player.PauseGame.performed += PauseGameAction;
         }
 
         public void OnDisable()
@@ -47,13 +51,17 @@ namespace Game.Input
             _actions.Player.Sprint.canceled -= SprintAction;
 
             _actions.Player.Jump.performed -= JumpAction;
+            _actions.Player.PauseGame.performed -= PauseGameAction;
 
             _actions.Disable();
         }
 
         public event Action OnJump;
+        public event Action OnPauseGame;
 
         private void JumpAction(InputAction.CallbackContext obj) => OnJump?.Invoke();
+
+        private void PauseGameAction(InputAction.CallbackContext obj) => OnPauseGame?.Invoke();
 
         private void SprintAction(InputAction.CallbackContext context) => IsSprinting =
             context.phase is InputActionPhase.Started or InputActionPhase.Performed;

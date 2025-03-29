@@ -9,6 +9,7 @@ namespace Game.UI
     public class SettingsUI : PanelBase
     {
         [SerializeField] private PreferencesApplier preferencesApplier;
+        [SerializeField] private Button backButton;
 
         [Header("Visual Settings")] //
         [SerializeField] private TMP_Dropdown resolutionDropdown;
@@ -47,6 +48,8 @@ namespace Game.UI
             musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
             ambientVolumeSlider.onValueChanged.AddListener(OnAmbientVolumeChanged);
             sfxVolumeSlider.onValueChanged.AddListener(OnSfxVolumeChanged);
+
+            backButton.onClick.AddListener(OnBackClicked);
         }
 
         private void OnDestroy()
@@ -59,7 +62,11 @@ namespace Game.UI
             musicVolumeSlider.onValueChanged.RemoveListener(OnMusicVolumeChanged);
             ambientVolumeSlider.onValueChanged.RemoveListener(OnAmbientVolumeChanged);
             sfxVolumeSlider.onValueChanged.RemoveListener(OnSfxVolumeChanged);
+
+            backButton.onClick.AddListener(OnBackClicked);
         }
+
+        private void OnBackClicked() => Hide();
 
         private void InitializeResolutionsDropdown()
         {
