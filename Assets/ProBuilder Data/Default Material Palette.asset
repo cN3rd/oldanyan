@@ -19,7 +19,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: f7d2a8ab2fd0e5c4980884374f7ed334, type: 2}
   - {fileID: 2100000, guid: 4e5f345501d35b0409ef7ec3f7f0bb5d, type: 2}
   - {fileID: 2100000, guid: 1d71810083f55b349bdbb225f3c7e2d8, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: f5331b27b9dfea248b298158565fee8d, type: 2}
+  - {fileID: 2100000, guid: 48799653c144b30468608fc1aaa144e3, type: 2}
   - {fileID: 0}
   - {fileID: 0}
