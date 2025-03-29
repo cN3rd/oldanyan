@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Game.Data
 {
@@ -15,6 +16,8 @@ namespace Game.Data
         private GamePreferencesManager() => ReadPreferences();
 
         public static GamePreferencesManager Instance => _lazy.Value;
+
+        public GamePreferences Preferences => _preferences;
 
         private void ReadPreferences()
         {

@@ -12,6 +12,7 @@ namespace Game
         [SerializeField] private Transform cameraTransform;
         [SerializeField] private Transform playerPivotTransform;
         [SerializeField] private InputState inputState;
+        [SerializeField] private Animator characterAnimator;
 
         [Header("Movement Controls")]
         [SerializeField] private float maxSpeed = 5f;

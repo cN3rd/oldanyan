@@ -1,8 +1,10 @@
 using System;
 using Eflatun.SceneReference;
+using Game.Data;
 using Game.SceneManagement;
 using Game.UI;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 namespace Game
@@ -37,11 +39,6 @@ namespace Game
             }
 #endif
             await LoadScene(initialScene);
-        }
-
-        private async void LoadLevel()
-        {
-
         }
 
         private async Awaitable LoadScene(SceneReference scene)

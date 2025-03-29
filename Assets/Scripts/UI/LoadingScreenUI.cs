@@ -9,11 +9,9 @@ using UnityEngine.UI;
 
 namespace Game.UI
 {
-    [RequireComponent(typeof(CanvasGroup))]
-    public class LoadingScreenUI : MonoBehaviour
+    public class LoadingScreenUI : PanelBase
     {
         [SerializeField] private Slider progressSlider;
-        [SerializeField] private CanvasGroup canvasGroup;
 
         [Header("Tips Display")]
         [SerializeField] private GameTips tipsCollection;
@@ -25,15 +23,15 @@ namespace Game.UI
 
         private void Start() => Show();
 
-        public void Show()
+        public override void Show()
         {
-            canvasGroup.alpha = 1;
+            base.Show();
             _tipsCoroutine = StartCoroutine(CycleTipsCoroutine());
         }
 
-        public void Hide()
+        public override void Hide()
         {
-            canvasGroup.alpha = 0;
+            base.Hide();
             StopCoroutine(_tipsCoroutine);
         }
 
