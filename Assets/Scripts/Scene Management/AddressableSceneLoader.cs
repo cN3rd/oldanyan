@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Eflatun.SceneReference;
 using UnityEngine;
@@ -33,33 +32,41 @@ namespace Game.SceneManagement
                 return;
             }
 
-            var handle = Addressables.LoadSceneAsync(sceneRef.Address, loadMode);
-
-            // If you're not reporting progress, just await the task itself
-            if (progress == null)
+            // Keep the handle outside to ensure it is freed if needed
+            AsyncOperationHandle<SceneInstance> handle = default;
+            try
             {
-                await handle.Task;
-            }
-            else
-            {
-                await TrackProgress(handle, progress);
-            }
+                handle = Addressables.LoadSceneAsync(sceneRef.Address, loadMode);
 
-            if (handle.Status == AsyncOperationStatus.Failed)
-            {
-                Debug.LogError($"Failed to load scene {sceneRef.Address}: {handle.OperationException}");
-                Addressables.Release(handle);
-                return;
-            }
+                if (progress != null)
+                {
+                    await TrackProgress(handle, progress);
+                }
 
-            _sceneInstances.Add(sceneRef.Guid, handle.Result);
+                // ensure the task is done
+                var loadedSceneInstance = await handle.Task;
+                _sceneInstances.Add(sceneRef.Guid, loadedSceneInstance);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Failed to load scene {sceneRef.Address}: {ex}");
+                if (handle.IsValid())
+                {
+                    Addressables.Release(handle);
+                }
+            }
+            // No finally needed here as we only release on failure for LoadSceneAsync
         }
 
         public async Awaitable UnloadAllAddedScenes()
         {
-            foreach (var sceneGuid in _sceneInstances.Keys)
+            var sceneGuidsToUnload = new List<string>(_sceneInstances.Keys);
+            foreach (string sceneGuid in sceneGuidsToUnload)
             {
-                await UnloadAddressableScene(new SceneReference(sceneGuid));
+                if (_sceneInstances.ContainsKey(sceneGuid))
+                {
+                     await UnloadAddressableScene(new SceneReference(sceneGuid));
+                }
             }
         }
 
@@ -71,31 +78,32 @@ namespace Game.SceneManagement
         public async Awaitable UnloadAddressableScene(SceneReference sceneRef,
             IProgress<float> progress = null)
         {
-            if (!_sceneInstances.TryGetValue(sceneRef.Guid, out SceneInstance sceneInstance))
+            if (!_sceneInstances.Remove(sceneRef.Guid, out SceneInstance sceneInstance))
             {
-                Debug.LogError("Cannot unload an unloaded scene.");
+                // Changed from Error to Warning/Log as trying to unload an unloaded scene isn't necessarily an error
+                Debug.LogWarning($"Cannot unload scene {sceneRef.Guid}: It is not currently tracked as loaded.");
                 return;
             }
 
-            var handle = Addressables.UnloadSceneAsync(sceneInstance);
-
-            // If you're not reporting progress, just await the task itself
-            if (progress == null)
+            try
             {
-                await handle.Task;
-            }
-            else
-            {
-                await TrackProgress(handle, progress);
-            }
+                var handle = Addressables.UnloadSceneAsync(sceneInstance);
 
-            if (handle.Status == AsyncOperationStatus.Failed)
-            {
-                Debug.LogError($"Failed to unload scene {sceneRef.Guid}: {handle.OperationException}");
-                return;
-            }
+                if (progress == null)
+                {
+                    await handle.Task;
+                }
+                else
+                {
+                    await TrackProgress(handle, progress);
+                }
 
-            _sceneInstances.Remove(sceneRef.Guid);
+                Debug.Log($"Successfully unloaded scene {sceneRef.Guid}");
+            }
+            catch (Exception ex)
+            {
+                 Debug.LogError($"Failed to unload scene {sceneRef.Guid}: {ex}");
+            }
         }
 
         /// <summary>
@@ -105,7 +113,7 @@ namespace Game.SceneManagement
             [System.Diagnostics.CodeAnalysis.NotNull] IProgress<float> progressReport)
         {
             float lastProgress = -1;
-            while (!handle.IsDone)
+            while (handle.IsValid() && !handle.IsDone)
             {
                 // only report on progress changes
                 float currentProgress = handle.PercentComplete;
@@ -119,7 +127,7 @@ namespace Game.SceneManagement
             }
 
             // Ensure the final progress (1.0) is reported
-            if (lastProgress < 1f)
+            if (handle.IsValid() && handle.Status == AsyncOperationStatus.Succeeded && lastProgress < 1f)
             {
                 progressReport.Report(1f);
             }
