@@ -4,24 +4,22 @@ using UnityEngine.UI;
 
 namespace Game.UI
 {
-    public class PauseMenuController : PanelBase
+    public class PauseMenuUI : PanelBase
     {
         [SerializeField] private Button resumeButton;
         [SerializeField] private Button restartButton;
         [SerializeField] private Button settingsButton;
         [SerializeField] private Button mainMenuButton;
 
-        // Events for external systems to subscribe to
         public event Action OnResumeClicked;
         public event Action OnRestartClicked;
         public event Action OnSettingsClicked;
         public event Action OnMainMenuClicked;
 
-        // Keep these methods public for Unity editor integration
-        public void OnResumeButtonClicked() => OnResumeClicked?.Invoke();
-        public void OnRestartButtonClicked() => OnRestartClicked?.Invoke();
-        public void OnSettingsButtonClicked() => OnSettingsClicked?.Invoke();
-        public void OnMainMenuButtonClicked() => OnMainMenuClicked?.Invoke();
+        private void OnResumeButtonClicked() => OnResumeClicked?.Invoke();
+        private void OnRestartButtonClicked() => OnRestartClicked?.Invoke();
+        private void OnSettingsButtonClicked() => OnSettingsClicked?.Invoke();
+        private void OnMainMenuButtonClicked() => OnMainMenuClicked?.Invoke();
 
         private void OnEnable()
         {
