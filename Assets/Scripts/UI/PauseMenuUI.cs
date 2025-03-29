@@ -33,13 +33,17 @@ namespace Game.UI
 
         private void OnEnable()
         {
+            resumeButton.onClick.AddListener(OnResumeButtonClicked);
             restartButton.onClick.AddListener(OnRestartButtonClicked);
+            settingsButton.onClick.AddListener(OnSettingsButtonClicked);
             mainMenuButton.onClick.AddListener(OnMainMenuButtonClicked);
         }
 
         private void OnDisable()
         {
+            resumeButton.onClick.RemoveListener(OnResumeButtonClicked);
             restartButton.onClick.RemoveListener(OnRestartButtonClicked);
+            settingsButton.onClick.AddListener(OnSettingsButtonClicked);
             mainMenuButton.onClick.RemoveListener(OnMainMenuButtonClicked);
         }
     }

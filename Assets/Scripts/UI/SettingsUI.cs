@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Game.Core;
 using TMPro;
 using UnityEngine;
@@ -6,6 +8,20 @@ using UnityEngine.UI;
 
 namespace Game.UI
 {
+    internal struct Resolution : IEquatable<Resolution>
+    {
+        public int width;
+        public int height;
+
+        public bool Equals(Resolution other) => width == other.width && height == other.height;
+        public override bool Equals(object obj) => obj is Resolution other && Equals(other);
+        public override int GetHashCode() => HashCode.Combine(width, height);
+        public static bool operator ==(Resolution left, Resolution right) => left.Equals(right);
+
+        public static bool operator !=(Resolution left, Resolution right) =>
+            !left.Equals(right);
+    }
+
     public class SettingsUI : PanelBase
     {
         [SerializeField] private PreferencesApplier preferencesApplier;
@@ -33,10 +49,13 @@ namespace Game.UI
             vsyncToggle.isOn = GamePreferencesManager.Instance.Preferences.visualSettings.vsync;
             masterVolumeSlider.value =
                 GamePreferencesManager.Instance.Preferences.audioSettings.masterVolume;
+
             ambientVolumeSlider.value =
                 GamePreferencesManager.Instance.Preferences.audioSettings.ambientVolume;
+
             musicVolumeSlider.value =
                 GamePreferencesManager.Instance.Preferences.audioSettings.musicVolume;
+
             sfxVolumeSlider.value =
                 GamePreferencesManager.Instance.Preferences.audioSettings.sfxVolume;
 
@@ -71,34 +90,36 @@ namespace Game.UI
         private void InitializeResolutionsDropdown()
         {
             resolutionDropdown.ClearOptions();
-            _resolutions = new Resolution[Screen.resolutions.Length];
+            _resolutions = Screen.resolutions
+                .Select(r => new Resolution { width = r.width, height = r.height }).Distinct()
+                .ToArray();
 
             // calculate desired width/height from settings
             int visualSettingsScreenWidth = GamePreferencesManager.Instance.Preferences
                 .visualSettings.screenWidth;
+
             int visualSettingsScreenHeight = GamePreferencesManager.Instance.Preferences
-                .visualSettings.screenWidth;
+                .visualSettings.screenHeight;
 
             // fallback for current resolution if nothing was ever selected
             int desiredWidth = visualSettingsScreenWidth == 0
                 ? Screen.currentResolution.width
                 : visualSettingsScreenWidth;
+
             int desiredHeight = visualSettingsScreenHeight == 0
                 ? Screen.currentResolution.height
                 : visualSettingsScreenHeight;
 
-            for (int i = 0; i < Screen.resolutions.Length; i++)
+            for (int i = 0; i < _resolutions.Length; i++)
             {
-                _resolutions[i] = Screen.resolutions[i];
-                string resolutionText =
-                    $"{Screen.resolutions[i].width} x {Screen.resolutions[i].height}";
+                string resolutionText = $"{_resolutions[i].width} x {_resolutions[i].height}";
                 resolutionDropdown.options.Add(new TMP_Dropdown.OptionData(resolutionText));
 
                 // select option based on desired resolution
                 if (_resolutions[i].width == desiredWidth &&
                     _resolutions[i].height == desiredHeight)
                 {
-                    resolutionDropdown.value = i;
+                    resolutionDropdown.SetValueWithoutNotify(i);
                 }
             }
 
@@ -120,6 +141,9 @@ namespace Game.UI
             {
                 windowingModeDropdown.options.Add(new TMP_Dropdown.OptionData(option.Key));
             }
+
+            windowingModeDropdown.SetValueWithoutNotify((int)GamePreferencesManager.Instance.Preferences
+                .visualSettings.fullScreenMode);
         }
 
         private void PropagateSettings()
@@ -132,6 +156,7 @@ namespace Game.UI
         {
             GamePreferencesManager.Instance.Preferences.visualSettings.screenWidth =
                 _resolutions[newSelection].width;
+
             GamePreferencesManager.Instance.Preferences.visualSettings.screenHeight =
                 _resolutions[newSelection].height;
 
