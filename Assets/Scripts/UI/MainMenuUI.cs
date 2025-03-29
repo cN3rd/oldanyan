@@ -17,7 +17,7 @@ namespace Game.UI
         private void Start()
         {
             Show();
-            if (GamePreferencesManager.Instance.Preferences.lastUsedSlot == 0)
+            if (GamePreferencesManager.Instance.Preferences.lastUsedSlot == -1)
             {
                 loadGameButton.interactable = false;
             }

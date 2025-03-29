@@ -6,7 +6,7 @@ namespace Game.Data
     [Serializable]
     public class GamePreferences
     {
-        public int lastUsedSlot;
+        public int lastUsedSlot = -1;
 
         [Serializable]
         public class VisualSettings
