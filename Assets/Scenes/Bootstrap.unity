@@ -315,6 +315,7 @@ GameObject:
   m_Component:
   - component: {fileID: 108690317}
   - component: {fileID: 108690319}
+  - component: {fileID: 108690320}
   - component: {fileID: 108690318}
   m_Layer: 0
   m_Name: Bootstrapper
@@ -350,11 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b7a0e131a3f4e4094d4227b62cd9b19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadingScreenUI: {fileID: 4531841212217814832}
-  initialScene:
-    asset: {fileID: 102900000, guid: 99c9720ab356a0642a771bea13969a05, type: 3}
-    guid: 99c9720ab356a0642a771bea13969a05
-  dontLoadSceneOnEditMode: 0
+  sceneManager: {fileID: 108690320}
 --- !u!114 &108690319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,6 +365,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: fbe184b77b9558741a97b00f93b6d032, type: 2}
+--- !u!114 &108690320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108690316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db5912659da33d949a8ef82b3ffe98d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingScreenUI: {fileID: 4531841212217814832}
+  initialScene:
+    asset: {fileID: 102900000, guid: 99c9720ab356a0642a771bea13969a05, type: 3}
+    guid: 99c9720ab356a0642a771bea13969a05
+  dontLoadSceneOnEditMode: 0
 --- !u!114 &224872901 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5336208950684469169, guid: edef6ef7a26a4274ba1b19172a03168f, type: 3}
@@ -3079,7 +3093,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4182346354692234559, guid: 3e5e516281807bf4eb4df10eed04a7a8, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 257.12
       objectReference: {fileID: 0}
     - target: {fileID: 4182346354692234559, guid: 3e5e516281807bf4eb4df10eed04a7a8, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -3099,7 +3113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5544994425315983190, guid: 3e5e516281807bf4eb4df10eed04a7a8, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 320.33
       objectReference: {fileID: 0}
     - target: {fileID: 5544994425315983190, guid: 3e5e516281807bf4eb4df10eed04a7a8, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -3119,7 +3133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7061074030004159750, guid: 3e5e516281807bf4eb4df10eed04a7a8, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 53.21
       objectReference: {fileID: 0}
     - target: {fileID: 7061074030004159750, guid: 3e5e516281807bf4eb4df10eed04a7a8, type: 3}
       propertyPath: m_AnchoredPosition.x

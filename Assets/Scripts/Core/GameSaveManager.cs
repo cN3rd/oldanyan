@@ -1,7 +1,8 @@
 using System.IO;
 using UnityEngine;
+using Game.Data;
 
-namespace Game.Data
+namespace Game.Core
 {
     public class GameSaveManager
     {

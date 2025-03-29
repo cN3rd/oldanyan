@@ -1,0 +1,4 @@
+{
+	"name": "Game.Core",
+	"references":[ "GUID:178d362c91adf2c44841a95080fd5b4c" ]
+}

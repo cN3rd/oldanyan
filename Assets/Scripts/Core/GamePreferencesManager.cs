@@ -1,9 +1,9 @@
 using System;
 using System.IO;
 using UnityEngine;
-using UnityEngine.Audio;
+using Game.Data;
 
-namespace Game.Data
+namespace Game.Core
 {
     public sealed class GamePreferencesManager
     {
