@@ -19,7 +19,7 @@ namespace Game
 
         // Reference to the scene guid of the current level, used in the scene-loading mechanism
         // Automatically set by OnValidate
-        [HideInInspector] [SerializeField] private string sceneGuid;
+        [SerializeField] private string sceneGuid;
         private readonly Dictionary<CheckpointComponent, int> _checkpointToIndex = new();
 
         private GameSaveWrapper _gameSaveWrapper;
@@ -86,6 +86,8 @@ namespace Game
                 return;
             }
 
+
+            Debug.Log(sceneGuid);
             _gameSaveWrapper.ActualSave.currentCheckpoint.id = checkpointIndex;
             _gameSaveWrapper.ActualSave.currentCheckpoint.sceneGuid = sceneGuid;
             _gameSaveWrapper.SaveGame();

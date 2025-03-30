@@ -46,6 +46,9 @@ namespace Game.SceneManagement
                 // ensure the task is done
                 var loadedSceneInstance = await handle.Task;
                 _sceneInstances.Add(sceneRef.Guid, loadedSceneInstance);
+
+                // set as active scene (for lighting and stuff)
+                SceneManager.SetActiveScene(loadedSceneInstance.Scene);
             }
             catch (Exception ex)
             {
