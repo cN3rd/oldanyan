@@ -27,6 +27,11 @@ namespace Game
         [SerializeField] private LayerMask groundLayer;
         [SerializeField] private float groundCheckDistance = 0.1f;
 
+        // Animator IDs
+        private static readonly int _speedId = Animator.StringToHash("Speed");
+        private static readonly int _jumpId = Animator.StringToHash("Jump");
+        private static readonly int _attackId = Animator.StringToHash("Attack");
+
         private Vector3 _horizontalVelocity = Vector3.zero;
         private Vector3 _moveDirection = Vector3.zero;
         private float _pitch, _yaw;
@@ -37,7 +42,10 @@ namespace Game
         {
             DoLook();
             UpdateCameraPosition();
+            UpdatePlayerAnimation();
         }
+
+        private void UpdatePlayerAnimation() => characterAnimator.SetFloat(_speedId, rb.linearVelocity.magnitude / (maxSpeed * sprintMultiplier));
 
         private void OnEnable() => inputState.OnJump += DoJump;
 
@@ -136,6 +144,7 @@ namespace Game
             }
 
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            characterAnimator.SetTrigger(_jumpId);
         }
     }
 }
