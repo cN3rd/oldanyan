@@ -14,7 +14,7 @@ Material:
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 0
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -51,6 +51,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 47b077236b1eed54084650edafbf347a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Mask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -83,8 +87,21 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlphaCutoff: 0.5
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -93,7 +110,9 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _LoopMain: 0
     - _MainTexOffset: -0.05
+    - _MaskOffset: 0
     - _MaskScale: 0.5
     - _Metallic: 0
     - _Mode: 0
@@ -103,6 +122,9 @@ Material:
     - _Offset: 0.67
     - _Parallax: 0.02
     - _Pow: 0.8
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -114,9 +136,15 @@ Material:
     - _BackFaceColor: {r: 0.8962264, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _MainOffset: {r: -0.07, g: 0, b: 0, a: 0}
+    - _MainScroll: {r: 0, g: 0, b: 0, a: 0}
     - _MainTexOffset: {r: 0, g: 0.37, b: 0, a: 0}
+    - _MainTiling: {r: 0, g: 0, b: 0, a: 0}
+    - _MaskScale: {r: 1, g: 1, b: 0, a: 0}
+    - _MaskScroll: {r: 0, g: 0, b: 0, a: 0}
     - _MaskStep: {r: 0, g: 0, b: 0, a: 0}
     - _NoiseOffset: {r: -0, g: 0, b: 0, a: 0}
     - _NoiseScale: {r: 1.38, g: 2, b: 0, a: 0}
     - _m: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
