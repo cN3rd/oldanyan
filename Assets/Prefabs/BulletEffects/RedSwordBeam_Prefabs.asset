@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90c4e7501bdb4357b2be3ed966c344dc, type: 3}
+  m_Name: RedSwordBeam_Prefabs
+  m_EditorClassIdentifier: 
+  effectName: RedSwordBeam
+  speed: 30
+  isTargeting: 0
+  rotSpeed: 0
+  chargeParticleTime: 0
+  chargeParticlesPrefab: {fileID: 0}
+  startParticlesPrefab: {fileID: 3204338347795362403, guid: bb47a0fb61cd89446839554ef484547a, type: 3}
+  bulletParticlesPrefab: {fileID: 8148023725010440780, guid: e275bfa06eff83343990652cb8947e79, type: 3}
+  hitParticlesPrefab: {fileID: 4597817528509040643, guid: 6a6ac9d2c632ee845b6e014ed6cb3231, type: 3}
+  chargeClip: {fileID: 0}
+  startClip: {fileID: 8300000, guid: f5ca75920ddd5d344bd3a8634b246a0e, type: 3}
+  bulletClip: {fileID: 0}
+  hitClip: {fileID: 8300000, guid: 40ab159bb55dac54b9dbf3fe58ccd5ab, type: 3}

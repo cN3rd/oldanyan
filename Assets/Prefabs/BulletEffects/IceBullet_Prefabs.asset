@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90c4e7501bdb4357b2be3ed966c344dc, type: 3}
+  m_Name: IceBullet_Prefabs
+  m_EditorClassIdentifier: 
+  effectName: IceBullet
+  speed: 40
+  isTargeting: 0
+  rotSpeed: 0
+  chargeParticleTime: 0
+  chargeParticlesPrefab: {fileID: 0}
+  startParticlesPrefab: {fileID: 3607502610564199379, guid: 561b055ce5c1f6643942421abcaccccd, type: 3}
+  bulletParticlesPrefab: {fileID: 2216423826434229085, guid: 19d43d80e3569ec418a9980ba31f2f50, type: 3}
+  hitParticlesPrefab: {fileID: 1574577211374143837, guid: 9f0fde77db4eac349abae9fbcaf82f2e, type: 3}
+  chargeClip: {fileID: 0}
+  startClip: {fileID: 8300000, guid: d40047749c7d67446a69e9d5ce6997ce, type: 3}
+  bulletClip: {fileID: 0}
+  hitClip: {fileID: 8300000, guid: 9ade5371184d39e4b95551102345c288, type: 3}

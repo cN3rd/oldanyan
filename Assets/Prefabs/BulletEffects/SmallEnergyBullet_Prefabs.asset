@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90c4e7501bdb4357b2be3ed966c344dc, type: 3}
+  m_Name: SmallEnergyBullet_Prefabs
+  m_EditorClassIdentifier: 
+  effectName: SmallEnergyBullet
+  speed: 100
+  isTargeting: 0
+  rotSpeed: 0
+  chargeParticleTime: 0
+  chargeParticlesPrefab: {fileID: 0}
+  startParticlesPrefab: {fileID: 6999790399010581725, guid: b638d8f54f09a1f498e210981656f841, type: 3}
+  bulletParticlesPrefab: {fileID: 2845263484245274845, guid: d887a4957d1f37e41b3f6aec284e8076, type: 3}
+  hitParticlesPrefab: {fileID: 1626336807950667345, guid: 26476fb5da4fc7a4ebcdb95fb4a6ea65, type: 3}
+  chargeClip: {fileID: 0}
+  startClip: {fileID: 8300000, guid: 192182b6d12f465439134d0df6c89856, type: 3}
+  bulletClip: {fileID: 0}
+  hitClip: {fileID: 8300000, guid: d40047749c7d67446a69e9d5ce6997ce, type: 3}

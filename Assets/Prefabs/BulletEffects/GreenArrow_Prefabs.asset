@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90c4e7501bdb4357b2be3ed966c344dc, type: 3}
+  m_Name: GreenArrow_Prefabs
+  m_EditorClassIdentifier: 
+  effectName: GreenArrow
+  speed: 20
+  isTargeting: 0
+  rotSpeed: 0
+  chargeParticleTime: 0
+  chargeParticlesPrefab: {fileID: 0}
+  startParticlesPrefab: {fileID: 638345549282233975, guid: db67c03d7c9150e4aae69868dec21a26, type: 3}
+  bulletParticlesPrefab: {fileID: 1079987684401405853, guid: d27f167989759024686bac5b66f5683f, type: 3}
+  hitParticlesPrefab: {fileID: 4247271764189083767, guid: f7c2c4ed457eb5345a3768d6cc5293b2, type: 3}
+  chargeClip: {fileID: 0}
+  startClip: {fileID: 8300000, guid: 1894e90ba48f3de47a3547a01043f9a3, type: 3}
+  bulletClip: {fileID: 0}
+  hitClip: {fileID: 8300000, guid: a48e7fdfa660aea4ebbaa50870d8572f, type: 3}

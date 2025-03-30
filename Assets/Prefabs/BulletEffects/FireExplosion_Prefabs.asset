@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90c4e7501bdb4357b2be3ed966c344dc, type: 3}
+  m_Name: FireExplosion_Prefabs
+  m_EditorClassIdentifier: 
+  effectName: FireExplosion
+  speed: 60
+  isTargeting: 0
+  rotSpeed: 0
+  chargeParticleTime: 1
+  chargeParticlesPrefab: {fileID: 1754938517876477184, guid: a00157ee0d75daf4ea88d86d7afbacef, type: 3}
+  startParticlesPrefab: {fileID: 8330947705635345283, guid: ee04edd4b6306ce40a5f3955b6e09046, type: 3}
+  bulletParticlesPrefab: {fileID: 6259046677526669957, guid: d8f847f4cef93c445acfbe8e40d26497, type: 3}
+  hitParticlesPrefab: {fileID: 111824900230632121, guid: 3c71562542452084d98580995bd0e7dc, type: 3}
+  chargeClip: {fileID: 8300000, guid: 4f3c6c5ed57a56b4299faabeba16e542, type: 3}
+  startClip: {fileID: 8300000, guid: e6b457f88185be14794923f1975103ea, type: 3}
+  bulletClip: {fileID: 0}
+  hitClip: {fileID: 8300000, guid: e81cd951a87282c498034a3e26eb6687, type: 3}

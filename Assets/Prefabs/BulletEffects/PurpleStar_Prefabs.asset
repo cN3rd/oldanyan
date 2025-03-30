@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90c4e7501bdb4357b2be3ed966c344dc, type: 3}
+  m_Name: PurpleStar_Prefabs
+  m_EditorClassIdentifier: 
+  effectName: PurpleStar
+  speed: 20
+  isTargeting: 0
+  rotSpeed: 0
+  chargeParticleTime: 0
+  chargeParticlesPrefab: {fileID: 0}
+  startParticlesPrefab: {fileID: 1393018994070726050, guid: 459eebd3712b27240be3cdd7f434c828, type: 3}
+  bulletParticlesPrefab: {fileID: 2611665001438117114, guid: 82684940e469bf94b93c83d3e39a96c5, type: 3}
+  hitParticlesPrefab: {fileID: 8908019223603794568, guid: 91a79b6f366382c478f75e060217d3d4, type: 3}
+  chargeClip: {fileID: 0}
+  startClip: {fileID: 8300000, guid: 60473c48151759442905c1e553d26f90, type: 3}
+  bulletClip: {fileID: 0}
+  hitClip: {fileID: 8300000, guid: f5ca75920ddd5d344bd3a8634b246a0e, type: 3}

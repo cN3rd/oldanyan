@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90c4e7501bdb4357b2be3ed966c344dc, type: 3}
+  m_Name: SmallLightBullet_Prefabs
+  m_EditorClassIdentifier: 
+  effectName: SmallLightBullet
+  speed: 60
+  isTargeting: 0
+  rotSpeed: 0
+  chargeParticleTime: 0
+  chargeParticlesPrefab: {fileID: 0}
+  startParticlesPrefab: {fileID: 6750585293848410992, guid: ce7a1c27c661dbc46b1912e22dc23efb, type: 3}
+  bulletParticlesPrefab: {fileID: 816417010117382099, guid: 095c1d595943ff14fa4c18b36bed4bf7, type: 3}
+  hitParticlesPrefab: {fileID: 7389544763733731974, guid: 1fa0ce1a083228c4d88bfaaa70c8fb11, type: 3}
+  chargeClip: {fileID: 0}
+  startClip: {fileID: 8300000, guid: f7dc1f024e704884597561c72551c3a8, type: 3}
+  bulletClip: {fileID: 0}
+  hitClip: {fileID: 8300000, guid: 2396e5e27cbb220448f26e2fe998fab7, type: 3}

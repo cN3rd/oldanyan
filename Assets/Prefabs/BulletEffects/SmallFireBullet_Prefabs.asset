@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90c4e7501bdb4357b2be3ed966c344dc, type: 3}
+  m_Name: SmallFireBullet_Prefabs
+  m_EditorClassIdentifier: 
+  effectName: SmallFireBullet
+  speed: 60
+  isTargeting: 0
+  rotSpeed: 0
+  chargeParticleTime: 0
+  chargeParticlesPrefab: {fileID: 0}
+  startParticlesPrefab: {fileID: 496127659606003289, guid: 47094ae9e10e3ee4994e52372e34c3e5, type: 3}
+  bulletParticlesPrefab: {fileID: 8459152571551120405, guid: b752c4a0c1dd6454daea7918ac98f3d8, type: 3}
+  hitParticlesPrefab: {fileID: 4676270845859620059, guid: 070223957a2e19b4195017af0bac9e36, type: 3}
+  chargeClip: {fileID: 0}
+  startClip: {fileID: 8300000, guid: 5ca0e48c80611f94b9b936351571d8e9, type: 3}
+  bulletClip: {fileID: 0}
+  hitClip: {fileID: 8300000, guid: 3ef9ce86cdc60bf4e846a1a742b3dbe4, type: 3}

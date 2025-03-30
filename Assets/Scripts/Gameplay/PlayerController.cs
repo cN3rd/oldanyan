@@ -172,6 +172,12 @@ namespace Game
 
         public void DoAttack()
         {
+            if (!_wand)
+            {
+                Debug.Log("Cannot attack without a wand");
+                return;
+            }
+
             Debug.Log("Starting attack...");
             characterAnimator.SetTrigger(_attackId);
         }
