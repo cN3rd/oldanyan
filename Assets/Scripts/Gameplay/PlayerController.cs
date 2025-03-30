@@ -157,6 +157,12 @@ namespace Game
 
         public void AttachWand(PickableWand pickableWand)
         {
+            if (_wand)
+            {
+                Debug.Log("Cannot take another wand... for now");
+                return;
+            }
+
             // Adhere to socket entirely
             pickableWand.transform.SetParent(handSocket);
             pickableWand.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
