@@ -3,6 +3,7 @@ using System.Collections;
 using Eflatun.SceneReference;
 using Game.Core;
 using Game.Data;
+using Game.Gameplay.Components;
 using Game.SceneManagement;
 using Game.UI;
 using UnityEngine;
@@ -65,15 +66,19 @@ namespace Game
         }
 
         // just reload the game from the most recently used slot
-        private void RestartClicked() => OnLoadGame(GamePreferencesManager.Instance.Preferences.lastUsedSlot);
+        private void RestartClicked() =>
+            OnLoadGame(GamePreferencesManager.Instance.Preferences.lastUsedSlot);
 
         public void AllCheckpointsComplete()
         {
             // In a bigger game we'd have a better way to get the current level
             // but we only have, like, 3 levels or so
-            var save = GameSaveWrapper.FromSaveSlot(GamePreferencesManager.Instance.Preferences.lastUsedSlot);
+            var save = GameSaveWrapper.FromSaveSlot(GamePreferencesManager.Instance.Preferences
+                .lastUsedSlot);
+
             string currentLevelGuid = save.ActualSave.currentCheckpoint.sceneGuid;
-            int currentLevelIndex = Array.IndexOf(staticGameData.levels, new SceneReference(currentLevelGuid));
+            int currentLevelIndex =
+                Array.IndexOf(staticGameData.levels, new SceneReference(currentLevelGuid));
 
             if (currentLevelIndex == -1)
             {

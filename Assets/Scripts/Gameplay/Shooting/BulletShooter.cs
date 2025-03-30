@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Linq;
 using Game.Data;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Game.Gameplay.Shooting
 {

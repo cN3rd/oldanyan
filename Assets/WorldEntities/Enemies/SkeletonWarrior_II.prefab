@@ -119,13 +119,25 @@ PrefabInstance:
       addedObject: {fileID: 5227255741396198817}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d6396a21f90ccf449b1abe9c920b0843, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 349642184066054538}
+      addedObject: {fileID: -6289361015840645076}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d6396a21f90ccf449b1abe9c920b0843, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3088470108434527202}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d6396a21f90ccf449b1abe9c920b0843, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -6289361015840645076}
+      addedObject: {fileID: 559438302168237061}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d6396a21f90ccf449b1abe9c920b0843, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2401319417923338792}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d6396a21f90ccf449b1abe9c920b0843, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3096428081305128409}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d6396a21f90ccf449b1abe9c920b0843, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 742312994141141535}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d6396a21f90ccf449b1abe9c920b0843, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6350220395616145238}
   m_SourcePrefab: {fileID: 100100000, guid: d6396a21f90ccf449b1abe9c920b0843, type: 3}
 --- !u!4 &915740274595661360 stripped
 Transform:
@@ -159,43 +171,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &349642184066054538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4546975219660908693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02ae32392fb11394db3c366cc2fab454, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 5227255741396198817}
-  animator: {fileID: 7111717792246261845}
-  shooter: {fileID: 3088470108434527202}
-  playerTransform: {fileID: 0}
-  detectionRange: 50
-  chaseOnSpawn: 1
-  attackCooldown: 2
-  maxHealth: 100
-  deathAnimation: {fileID: -203655887218126122, guid: 6b1cf4fa1db48fe4a9edcfc01faaf488, type: 3}
---- !u!114 &3088470108434527202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4546975219660908693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c177191307194f358ff9056a2e656df5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectPrefabs: {fileID: 11400000, guid: 0401c7c4b3122d443838dff2aaea996d, type: 2}
-  index: 4
-  startNodeTrans: {fileID: 8994750341466756607}
-  shootInterval: 0.2
 --- !u!136 &-6289361015840645076
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -219,6 +194,100 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &3088470108434527202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4546975219660908693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c177191307194f358ff9056a2e656df5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectPrefabs: {fileID: 11400000, guid: 0401c7c4b3122d443838dff2aaea996d, type: 2}
+  index: 4
+  startNodeTrans: {fileID: 8994750341466756607}
+  shootInterval: 0.2
+--- !u!114 &559438302168237061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4546975219660908693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e88137bfeb504146a8d8b8708f1533a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 100
+--- !u!114 &2401319417923338792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4546975219660908693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07fa0a67ce9c7294b8f5008b7c902dbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+--- !u!114 &3096428081305128409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4546975219660908693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b253fee29f916294cb37cbab235a69a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 5227255741396198817}
+  animator: {fileID: 7111717792246261845}
+  targetContainer: {fileID: 2401319417923338792}
+  detectionRange: 50
+  chaseOnSpawn: 1
+--- !u!114 &742312994141141535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4546975219660908693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 055857751224d7e47bb3545599a1d788, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 7111717792246261845}
+  shooter: {fileID: 3088470108434527202}
+  targetContainer: {fileID: 2401319417923338792}
+  locomotion: {fileID: 3096428081305128409}
+  attackDamage: 10
+  attackCooldown: 2
+--- !u!114 &6350220395616145238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4546975219660908693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07754549f34f2ad4eaf62597c2cb2df4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 559438302168237061}
+  targetContainer: {fileID: 2401319417923338792}
+  locomotion: {fileID: 3096428081305128409}
+  attacker: {fileID: 742312994141141535}
+  deathAnimation: {fileID: -203655887218126122, guid: 6b1cf4fa1db48fe4a9edcfc01faaf488, type: 3}
 --- !u!95 &7111717792246261845 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: d6396a21f90ccf449b1abe9c920b0843, type: 3}

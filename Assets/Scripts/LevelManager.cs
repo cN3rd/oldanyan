@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Eflatun.SceneReference;
 using Game.Core;
+using Game.Gameplay.Components;
 using Game.Input;
 using Game.SceneManagement;
 using Game.UI;
@@ -85,7 +86,6 @@ namespace Game
             {
                 return;
             }
-
 
             Debug.Log(sceneGuid);
             _gameSaveWrapper.ActualSave.currentCheckpoint.id = checkpointIndex;

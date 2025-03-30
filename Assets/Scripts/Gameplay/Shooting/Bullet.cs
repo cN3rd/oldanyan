@@ -1,7 +1,6 @@
 using System;
-using Game.NPCs;
+using Game.Gameplay.Components;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game.Gameplay.Shooting
 {
@@ -11,28 +10,28 @@ namespace Game.Gameplay.Shooting
         [SerializeField] public Collider bulletCollider;
         [SerializeField] public Rigidbody bulletRigidbody;
 
-        [Header("Movement Settings")]
-        public float speed = 5;
+        [Header("Movement Settings")] public float speed = 5;
+
         public bool isTargeting;
         public Transform target;
         public float rotSpeed;
 
-        [Header("Effect References")]
-        public ParticleSystem onHitEffect;
-        public GameObject onHitEffectPrefab;
-        public bool useHitPrefab = false;
+        [Header("Effect References")] public ParticleSystem onHitEffect;
 
-        [Header("Audio Settings")]
-        public AudioClip bulletClip;
+        public GameObject onHitEffectPrefab;
+        public bool useHitPrefab;
+
+        [Header("Audio Settings")] public AudioClip bulletClip;
+
         public AudioClip onHitClip;
 
         public int bulletDamage;
-
-        [NonSerialized] public GameObject origin;
         [HideInInspector] public AudioSource audioSource;
 
         private Transform _cachedTransform;
         private bool _hasHit;
+
+        [NonSerialized] public GameObject origin;
 
         private void Awake()
         {
@@ -44,10 +43,13 @@ namespace Game.Gameplay.Shooting
         private void FixedUpdate()
         {
             // Only handle targeting in FixedUpdate
-            if (_hasHit || !isTargeting || !target) return;
+            if (_hasHit || !isTargeting || !target)
+            {
+                return;
+            }
 
-            Vector3 dirToTarget = (target.position - _cachedTransform.position).normalized;
-            Quaternion targetRotation = Quaternion.LookRotation(dirToTarget);
+            var dirToTarget = (target.position - _cachedTransform.position).normalized;
+            var targetRotation = Quaternion.LookRotation(dirToTarget);
             _cachedTransform.rotation = Quaternion.Slerp(
                 _cachedTransform.rotation,
                 targetRotation,
@@ -59,25 +61,40 @@ namespace Game.Gameplay.Shooting
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (_hasHit) return;
-            if (collision.gameObject == origin) return;
-            if (!collision.gameObject.CompareTag("Enemy") && !collision.gameObject.CompareTag("Player")) return;
+            if (_hasHit)
+            {
+                return;
+            }
+
+            if (collision.gameObject == origin)
+            {
+                return;
+            }
+
+            if (!collision.gameObject.CompareTag("Enemy") && !collision.gameObject.CompareTag("Player"))
+            {
+                return;
+            }
 
             _hasHit = true;
 
-            Vector3 hitPoint = collision.contacts[0].point;
+            var hitPoint = collision.contacts[0].point;
 
             // Process damage
-            if (collision.gameObject.TryGetComponent(out PlayerController playerController))
-                playerController.TakeDamage(10);
-            else if (collision.gameObject.TryGetComponent(out EnemyBehaviour enemyBehaviour))
-                enemyBehaviour.TakeDamage(100);
+            if (collision.gameObject.TryGetComponent<HealthComponent>(out var healthComponent))
+            {
+                healthComponent.TakeDamage(bulletDamage);
+            }
 
             // Spawn effects
             if (useHitPrefab && onHitEffectPrefab)
+            {
                 Instantiate(onHitEffectPrefab, hitPoint, Quaternion.identity);
+            }
             else if (onHitEffect)
+            {
                 Instantiate(onHitEffect, hitPoint, Quaternion.identity);
+            }
 
             // Destroy the bullet
             Destroy(gameObject);

@@ -7,7 +7,7 @@ namespace Game.Gameplay.Shooting
         public float time = 3;
         public AudioClip onClip;
 
-        void Start()
+        private void Start()
         {
             var audio = gameObject.AddComponent<AudioSource>();
             if (onClip != null)
