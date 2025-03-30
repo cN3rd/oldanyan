@@ -149,6 +149,10 @@ PrefabInstance:
       value: SkeletonLich
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b1d6781c4e3f65b478c606e5850bcd9c, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b1d6781c4e3f65b478c606e5850bcd9c, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
