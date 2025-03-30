@@ -1,12 +1,16 @@
 using System;
 using Game.NPCs;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Gameplay.Shooting
 {
     [RequireComponent(typeof(Rigidbody))]
     public class Bullet : MonoBehaviour
     {
+        [SerializeField] public Collider bulletCollider;
+        [SerializeField] public Rigidbody bulletRigidbody;
+
         [Header("Movement Settings")]
         public float speed = 5;
         public bool isTargeting;
@@ -28,32 +32,13 @@ namespace Game.Gameplay.Shooting
         [HideInInspector] public AudioSource audioSource;
 
         private Transform _cachedTransform;
-        private Rigidbody _rb;
         private bool _hasHit;
 
         private void Awake()
         {
             _cachedTransform = transform;
-            _rb = GetComponent<Rigidbody>();
-
-            _rb.useGravity = false;
-            _rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
-            _rb.interpolation = RigidbodyInterpolation.Interpolate;
-            _rb.linearVelocity = _cachedTransform.forward * speed;
-
+            bulletRigidbody.linearVelocity = _cachedTransform.forward * speed;
             Destroy(gameObject, 5f);
-
-            // Ignore collision with origin
-            if (origin != null)
-            {
-                // TODO: get rid of
-                Collider bulletCollider = GetComponent<Collider>();
-                Collider originCollider = origin.GetComponent<Collider>();
-                if (bulletCollider && originCollider)
-                {
-                    Physics.IgnoreCollision(bulletCollider, originCollider, true);
-                }
-            }
         }
 
         private void FixedUpdate()
@@ -69,7 +54,7 @@ namespace Game.Gameplay.Shooting
                 rotSpeed * Time.fixedDeltaTime
             );
 
-            _rb.linearVelocity = _cachedTransform.forward * speed;
+            bulletRigidbody.linearVelocity = _cachedTransform.forward * speed;
         }
 
         private void OnCollisionEnter(Collision collision)

@@ -24702,6 +24702,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382d7bb3821f40dbad8c8518c8a2042f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletCollider: {fileID: -2909895428921487828}
+  bulletRigidbody: {fileID: 8329380054704379003}
   speed: 60
   isTargeting: 0
   target: {fileID: 0}
@@ -24711,6 +24713,7 @@ MonoBehaviour:
   useHitPrefab: 1
   bulletClip: {fileID: 0}
   onHitClip: {fileID: 0}
+  bulletDamage: 0
   audioSource: {fileID: 8576139066332786469}
 --- !u!82 &8576139066332786469
 AudioSource:
@@ -24831,11 +24834,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!135 &-2909895428921487828
 SphereCollider:
   m_ObjectHideFlags: 0

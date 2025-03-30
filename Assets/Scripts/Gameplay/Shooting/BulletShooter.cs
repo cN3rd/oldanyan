@@ -102,8 +102,11 @@ namespace Game.Gameplay.Shooting
                     targetRotation);
 
                 var bulletData = bulletInstance.GetComponent<Bullet>();
+                var originCollider = shootingArgs.originObject.GetComponent<Collider>();
+
                 bulletData.origin = shootingArgs.originObject;
                 bulletData.bulletDamage = shootingArgs.damage;
+                Physics.IgnoreCollision(bulletData.bulletCollider, originCollider, true);
             }
         }
     }
