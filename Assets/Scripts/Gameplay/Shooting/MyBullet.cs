@@ -1,8 +1,10 @@
 using System;
+using Game.NPCs;
 using UnityEngine;
 
 namespace Game.Gameplay.Shooting
 {
+    [RequireComponent(typeof(Rigidbody))]
     public class MyBullet : MonoBehaviour
     {
         [Header("Movement Settings")]
@@ -21,46 +23,88 @@ namespace Game.Gameplay.Shooting
         public AudioClip onHitClip;
 
         [NonSerialized] public GameObject origin;
-
-        // Reference to the audio source (assigned in prefab)
         [HideInInspector] public AudioSource audioSource;
 
-        // Cache transform for better performance
-        private Transform cachedTransform;
+        private Transform _cachedTransform;
+        private Rigidbody _rb;
+        private bool _hasHit;
 
         private void Awake()
         {
-            // Cache transform reference
-            cachedTransform = transform;
+            _cachedTransform = transform;
+            _rb = GetComponent<Rigidbody>();
+
+            // Configure rigidbody for optimal bullet physics
+            _rb.useGravity = false;
+            _rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+            _rb.interpolation = RigidbodyInterpolation.Interpolate;
+
+            // Set initial velocity
+            _rb.linearVelocity = _cachedTransform.forward * speed;
+
+            // Auto-destroy after 5 seconds
+            Destroy(gameObject, 5f);
+
+            // Ignore collision with origin
+            if (origin != null)
+            {
+                Collider bulletCollider = GetComponent<Collider>();
+                Collider originCollider = origin.GetComponent<Collider>();
+                if (bulletCollider != null && originCollider != null)
+                {
+                    Physics.IgnoreCollision(bulletCollider, originCollider, true);
+                }
+            }
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            if (isTargeting && target)
-            {
-                cachedTransform.forward = Vector3.RotateTowards(cachedTransform.forward,
-                    target.position - cachedTransform.position, rotSpeed * Time.deltaTime, 0.0f);
-            }
+            // Only handle targeting in FixedUpdate
+            if (_hasHit || !isTargeting || !target) return;
 
-            cachedTransform.Translate(Vector3.forward * (speed * Time.deltaTime), Space.Self);
+            // Calculate direction to target
+            Vector3 dirToTarget = (target.position - _cachedTransform.position).normalized;
+
+            // Gradually rotate toward target
+            Quaternion targetRotation = Quaternion.LookRotation(dirToTarget);
+            _cachedTransform.rotation = Quaternion.Slerp(
+                _cachedTransform.rotation,
+                targetRotation,
+                rotSpeed * Time.fixedDeltaTime
+            );
+
+            // Update linearVelocity based on new forward direction
+            _rb.linearVelocity = _cachedTransform.forward * speed;
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnCollisionEnter(Collision collision)
         {
-            if (!other.CompareTag("Enemy") || !other.CompareTag("Player")) return;
-            if (other.gameObject == origin) return;
+            if (_hasHit) return;
 
-            Debug.Log("Actual hit!");
+            // Skip collision with origin (redundant safety check)
+            if (collision.gameObject == origin) return;
 
-            if (useHitPrefab && onHitEffectPrefab != null)
-            {
-                Instantiate(onHitEffectPrefab, cachedTransform.position, Quaternion.identity);
-            }
-            else if (onHitEffect != null)
-            {
-                Instantiate(onHitEffect, cachedTransform.position, Quaternion.identity);
-            }
+            // Only process collisions with valid targets
+            if (!collision.gameObject.CompareTag("Enemy") && !collision.gameObject.CompareTag("Player")) return;
 
+            _hasHit = true;
+
+            // Get the contact point
+            Vector3 hitPoint = collision.contacts[0].point;
+
+            // Process damage
+            if (collision.gameObject.TryGetComponent(out PlayerController playerController))
+                playerController.TakeDamage(10);
+            else if (collision.gameObject.TryGetComponent(out EnemyBehaviour enemyBehaviour))
+                enemyBehaviour.TakeDamage(100);
+
+            // Spawn effects
+            if (useHitPrefab && onHitEffectPrefab)
+                Instantiate(onHitEffectPrefab, hitPoint, Quaternion.identity);
+            else if (onHitEffect)
+                Instantiate(onHitEffect, hitPoint, Quaternion.identity);
+
+            // Destroy the bullet
             Destroy(gameObject);
         }
     }

@@ -16,7 +16,7 @@ namespace Game.Gameplay.Shooting
         private float _lastShootTime;
         private BulletEffectPrefabs CurrentEffect => effectPrefabs.GetEffectByIndex(index);
 
-        public void Shoot(Vector3 targetPos)
+        public void Shoot(Vector3 targetPos, GameObject originObject)
         {
             // Ensure we have a valid effect and start position
             if (!CurrentEffect)
@@ -33,10 +33,10 @@ namespace Game.Gameplay.Shooting
                 return;
             }
 
-            StartCoroutine(ShootIE(targetPos));
+            StartCoroutine(ShootIE(targetPos, originObject));
         }
 
-        public IEnumerator ShootIE(Vector3 targetPos)
+        public IEnumerator ShootIE(Vector3 targetPos, GameObject originObject)
         {
             if (!startNodeTrans)
             {
@@ -47,7 +47,7 @@ namespace Game.Gameplay.Shooting
             _lastShootTime = Time.time;
             yield return Charge();
 
-            DoShoot(targetPos);
+            DoShoot(targetPos, originObject);
         }
 
         public IEnumerator Charge()
@@ -67,7 +67,7 @@ namespace Game.Gameplay.Shooting
             Destroy(chargeInstance);
         }
 
-        public void DoShoot(Vector3 targetPos)
+        public void DoShoot(Vector3 targetPos, GameObject originObject)
         {
             var targetDir = targetPos - startNodeTrans.position;
             targetDir = targetDir.normalized;
@@ -95,7 +95,7 @@ namespace Game.Gameplay.Shooting
                     targetRotation);
 
                 var bulletData = bulletInstance.GetComponent<MyBullet>();
-                bulletData.origin = this.gameObject;
+                bulletData.origin = originObject;
             }
         }
     }

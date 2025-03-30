@@ -43,8 +43,11 @@ namespace Game
         private Vector3 _moveDirection = Vector3.zero;
         private float _pitch, _yaw;
         private int _hp;
+        private Collider[] _hitColliders;
 
         public event Action OnPlayerDeath;
+
+        private void Awake() => _hitColliders = new Collider[10];
 
         private void FixedUpdate() => DoMovement();
 
@@ -202,7 +205,47 @@ namespace Game
         {
             Debug.Log("Attacking...");
             shooter.startNodeTrans = _wand.ShootPoint;
-            shooter.Shoot(playerPivotTransform.forward * 100f);
+            var enemyPosition = playerPivotTransform.forward * 100f;
+
+            var enemyToAttack = LocateClosestEnemy();
+            if (enemyToAttack)
+                enemyPosition = enemyToAttack.transform.position;
+
+            shooter.Shoot(enemyPosition, this.gameObject);
+        }
+
+        public GameObject LocateClosestEnemy()
+        {
+            const float DetectionRadius = 5f;
+            Vector3 lookDirection = playerPivotTransform.forward;
+
+            int numFoundColliders = Physics.OverlapSphereNonAlloc(transform.position, DetectionRadius, _hitColliders);
+
+            GameObject closestEnemy = null;
+            float bestAlignmentScore = -1f;
+            for (int index = 0; index < numFoundColliders; index++)
+            {
+                var potentialCollider = _hitColliders[index];
+                if (!potentialCollider.gameObject.CompareTag("Enemy"))
+                {
+                    continue;
+                }
+
+                // Calculate direction to this enemy
+                Vector3 directionToEnemy =
+                    potentialCollider.transform.position - playerPivotTransform.position;
+                float alignmentScore =
+                    Vector3.Dot(lookDirection.normalized, directionToEnemy.normalized);
+
+                // If this score is better than our current best, update
+                if (alignmentScore > bestAlignmentScore)
+                {
+                    bestAlignmentScore = alignmentScore;
+                    closestEnemy = potentialCollider.gameObject;
+                }
+            }
+
+            return closestEnemy;
         }
 
         public void TakeDamage(int damageHP)

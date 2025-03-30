@@ -216,7 +216,7 @@ namespace Game.NPCs
 
         public void EmitAttackParticle()
         {
-            shooter.Shoot(playerTransform.position);
+            shooter.Shoot(playerTransform.position, this.gameObject);
         }
 
         private enum EnemyState
