@@ -192,6 +192,7 @@ MonoBehaviour:
     m_Bits: 1
   groundCheckDistance: 0.1
   maxHP: 100
+  attackDamage: 100
 --- !u!114 &-3094614500158782349
 MonoBehaviour:
   m_ObjectHideFlags: 0
