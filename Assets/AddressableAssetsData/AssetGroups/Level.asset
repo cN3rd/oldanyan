@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Level
+  m_EditorClassIdentifier: 
+  m_GroupName: Level
+  m_GUID: acaa2fe4490f65948bb691b35d72fc29
+  m_SerializeEntries:
+  - m_GUID: b4eba202bfe43a84289b9635f087d34b
+    m_Address: Assets/Scenes/MarkiScene
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf059e0402411f14c923cb8e01e98942
+    m_Address: Assets/Scenes/MarkiScene.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: dadcb3b9d51a6bb49b2c3ffec657ddad, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: d338a4cd907cbfc49b38089564bfc44a, type: 2}
+    - {fileID: 11400000, guid: 42858f045a2ea1f48ac60b632ef9fb77, type: 2}

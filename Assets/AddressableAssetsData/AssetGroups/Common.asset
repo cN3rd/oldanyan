@@ -13,11 +13,16 @@ MonoBehaviour:
   m_Name: Common
   m_EditorClassIdentifier: 
   m_GroupName: Common
-  m_GUID: 9030bc4a491d9b54a9f760d1f18a9f7b
-  m_SerializeEntries: []
+  m_GUID: 13a1c96b8a8313542ac6de74b9fcc26a
+  m_SerializeEntries:
+  - m_GUID: 6e3620f90a0bbcb4bbacdec5cb6c2e8b
+    m_Address: Assets/External
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
-  m_Settings: {fileID: 11400000, guid: 517c3ba6845d68f45a3af34203b66fbc, type: 2}
+  m_Settings: {fileID: 11400000, guid: dadcb3b9d51a6bb49b2c3ffec657ddad, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 263d5167bc5a4e9489eb3833241af6a5, type: 2}
-    - {fileID: 11400000, guid: aa7817f4ae134ae4da4d2f18072bf00b, type: 2}
+    - {fileID: 11400000, guid: 13871565c63cbf6469683fefd91369fb, type: 2}
+    - {fileID: 11400000, guid: 40576323d6e20a24da1d6db3086e3c26, type: 2}

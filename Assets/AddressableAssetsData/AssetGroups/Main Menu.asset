@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Main Menu
   m_EditorClassIdentifier: 
   m_GroupName: Main Menu
-  m_GUID: 2cfc317dd2381814bb0e9f72f1c8412c
+  m_GUID: a0911767ca8022c4b9e26fa108cdc988
   m_SerializeEntries:
   - m_GUID: 034c5e1f12ae47c47acc4438a99d8e23
     m_Address: Assets/Scenes/MainMenu.unity
@@ -21,8 +21,8 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
-  m_Settings: {fileID: 11400000, guid: 517c3ba6845d68f45a3af34203b66fbc, type: 2}
+  m_Settings: {fileID: 11400000, guid: dadcb3b9d51a6bb49b2c3ffec657ddad, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 2708acb58a78bd743856c297d07ab62c, type: 2}
-    - {fileID: 11400000, guid: 8ff05adcca5cf2b40bd70ffce7e31430, type: 2}
+    - {fileID: 11400000, guid: 9600c74bd36f94540b26368b2a46d5d6, type: 2}
+    - {fileID: 11400000, guid: 7d69b0fe4879a7a4d9737be3e96dee9f, type: 2}

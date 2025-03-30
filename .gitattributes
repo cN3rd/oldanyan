@@ -32,6 +32,9 @@
 
 # iOS plugin possible extensions
 *.h          text eol=lf
+
+# Exceptions for .asset files such as lightning pre-baking
+LightingData.asset     binary
 *.c          text eol=lf
 *.cpp        text eol=lf
 *.m          text eol=lf
