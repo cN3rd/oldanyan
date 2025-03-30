@@ -15,6 +15,8 @@ namespace Game
         [SerializeField] private Transform playerPivotTransform;
         [SerializeField] private Animator characterAnimator;
         [SerializeField] private InputState inputState;
+        [SerializeField] private Transform handSocket;
+        private PickableWand _wand;
 
         [Header("Movement Controls")]
         [SerializeField] private float maxSpeed = 5f;
@@ -47,9 +49,17 @@ namespace Game
 
         private void UpdatePlayerAnimation() => characterAnimator.SetFloat(_speedId, rb.linearVelocity.magnitude / (maxSpeed * sprintMultiplier));
 
-        private void OnEnable() => inputState.OnJump += DoJump;
+        private void OnEnable()
+        {
+            inputState.OnJump += DoJump;
+            inputState.OnAttack += DoAttack;
+        }
 
-        private void OnDisable() => inputState.OnJump -= DoJump;
+        private void OnDisable()
+        {
+            inputState.OnJump -= DoJump;
+            inputState.OnAttack -= DoAttack;
+        }
 
         private void DoMovement()
         {
@@ -68,8 +78,6 @@ namespace Game
                 }
                 return;
             }
-
-            Debug.Log(currentMove);
 
             // Calculate move direction in world space
             _moveDirection.x = playerPivotTransform.right.x * currentMove.x +
@@ -145,6 +153,26 @@ namespace Game
 
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             characterAnimator.SetTrigger(_jumpId);
+        }
+
+        public void AttachWand(PickableWand pickableWand)
+        {
+            // Adhere to socket entirely
+            pickableWand.transform.SetParent(handSocket);
+            pickableWand.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+
+            _wand = pickableWand;
+        }
+
+        public void DoAttack()
+        {
+            Debug.Log("Starting attack...");
+            characterAnimator.SetTrigger(_attackId);
+        }
+
+        public void EmitAttackParticle()
+        {
+            Debug.Log("Attacking...");
         }
     }
 }

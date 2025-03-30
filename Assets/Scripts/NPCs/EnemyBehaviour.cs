@@ -167,7 +167,6 @@ namespace Game.NPCs
             if (Time.time >= _lastAttackTime + attackCooldown)
             {
                 animator.SetTrigger(_attackID);
-                // TODO: actual attack
                 _lastAttackTime = Time.time;
             }
         }
@@ -211,6 +210,11 @@ namespace Game.NPCs
             {
                 animator.SetTrigger(_gotHitID);
             }
+        }
+
+        public void EmitAttackParticle()
+        {
+            Debug.Log("Player is attacked");
         }
 
         private enum EnemyState

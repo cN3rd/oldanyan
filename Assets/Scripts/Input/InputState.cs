@@ -34,6 +34,7 @@ namespace Game.Input
             _actions.Player.Sprint.canceled += SprintAction;
 
             _actions.Player.Jump.performed += JumpAction;
+            _actions.Player.Attack.performed += AttackAction;
             _actions.Player.PauseGame.performed += PauseGameAction;
         }
 
@@ -51,17 +52,21 @@ namespace Game.Input
             _actions.Player.Sprint.canceled -= SprintAction;
 
             _actions.Player.Jump.performed -= JumpAction;
+            _actions.Player.Attack.performed -= AttackAction;
             _actions.Player.PauseGame.performed -= PauseGameAction;
 
             _actions.Disable();
         }
 
         public event Action OnJump;
+        public event Action OnAttack;
         public event Action OnPauseGame;
 
-        private void JumpAction(InputAction.CallbackContext obj) => OnJump?.Invoke();
+        private void AttackAction(InputAction.CallbackContext context) => OnAttack?.Invoke();
 
-        private void PauseGameAction(InputAction.CallbackContext obj) => OnPauseGame?.Invoke();
+        private void JumpAction(InputAction.CallbackContext context) => OnJump?.Invoke();
+
+        private void PauseGameAction(InputAction.CallbackContext context) => OnPauseGame?.Invoke();
 
         private void SprintAction(InputAction.CallbackContext context) => IsSprinting =
             context.phase is InputActionPhase.Started or InputActionPhase.Performed;
