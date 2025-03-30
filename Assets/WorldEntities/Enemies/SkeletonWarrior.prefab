@@ -285,6 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 100
+  healthUI: {fileID: 0}
 --- !u!114 &4651595371755854048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,6 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07754549f34f2ad4eaf62597c2cb2df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 4403260221813794483}
   health: {fileID: 7862454556076382436}
   targetContainer: {fileID: 4651595371755854048}
   locomotion: {fileID: 7576658439521588685}

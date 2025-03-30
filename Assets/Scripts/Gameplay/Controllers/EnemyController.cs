@@ -11,6 +11,7 @@ namespace Game.Gameplay.Components
     public class EnemyController : MonoBehaviour
     {
         private static readonly int _dieID = Animator.StringToHash("Die");
+        [SerializeField] private Animator animator;
         [SerializeField] private HealthComponent health;
         [SerializeField] private TargetContainerComponent targetContainer;
         [SerializeField] private EnemyLocomotionComponent locomotion;
@@ -33,7 +34,6 @@ namespace Game.Gameplay.Components
 
         private void HandleEnemyDeath()
         {
-            var animator = GetComponent<Animator>();
             animator.SetTrigger(_dieID);
 
             locomotion.StopChasing();

@@ -99,6 +99,7 @@ namespace Game.Gameplay.Shooting
                     startNodeTrans.position,
                     targetRotation);
 
+                // I'm willing to take the deduction here...
                 var bulletData = bulletInstance.GetComponent<Bullet>();
                 var originCollider = shootingArgs.originObject.GetComponent<Collider>();
 
