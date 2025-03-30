@@ -6,6 +6,13 @@ using UnityEngine.InputSystem;
 
 namespace Game.Gameplay.Shooting
 {
+    public struct ShootingArgs
+    {
+        public Vector3 targetPos;
+        public GameObject originObject;
+        public int damage;
+    }
+
     public class BulletShooter : MonoBehaviour
     {
         public BulletEffectPrefabsCollection effectPrefabs;
@@ -16,7 +23,7 @@ namespace Game.Gameplay.Shooting
         private float _lastShootTime;
         private BulletEffectPrefabs CurrentEffect => effectPrefabs.GetEffectByIndex(index);
 
-        public void Shoot(Vector3 targetPos, GameObject originObject)
+        public void Shoot(ShootingArgs shootingArgs)
         {
             // Ensure we have a valid effect and start position
             if (!CurrentEffect)
@@ -33,10 +40,10 @@ namespace Game.Gameplay.Shooting
                 return;
             }
 
-            StartCoroutine(ShootIE(targetPos, originObject));
+            StartCoroutine(ShootIE(shootingArgs));
         }
 
-        public IEnumerator ShootIE(Vector3 targetPos, GameObject originObject)
+        public IEnumerator ShootIE(ShootingArgs shootingArgs)
         {
             if (!startNodeTrans)
             {
@@ -47,7 +54,7 @@ namespace Game.Gameplay.Shooting
             _lastShootTime = Time.time;
             yield return Charge();
 
-            DoShoot(targetPos, originObject);
+            DoShoot(shootingArgs);
         }
 
         public IEnumerator Charge()
@@ -67,9 +74,9 @@ namespace Game.Gameplay.Shooting
             Destroy(chargeInstance);
         }
 
-        public void DoShoot(Vector3 targetPos, GameObject originObject)
+        public void DoShoot(ShootingArgs shootingArgs)
         {
-            var targetDir = targetPos - startNodeTrans.position;
+            var targetDir = shootingArgs.targetPos - startNodeTrans.position;
             targetDir = targetDir.normalized;
 
             // Calculate the rotation once
@@ -94,8 +101,9 @@ namespace Game.Gameplay.Shooting
                     startNodeTrans.position,
                     targetRotation);
 
-                var bulletData = bulletInstance.GetComponent<MyBullet>();
-                bulletData.origin = originObject;
+                var bulletData = bulletInstance.GetComponent<Bullet>();
+                bulletData.origin = shootingArgs.originObject;
+                bulletData.bulletDamage = shootingArgs.damage;
             }
         }
     }

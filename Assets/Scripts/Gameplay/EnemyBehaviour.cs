@@ -26,17 +26,18 @@ namespace Game.NPCs
         [SerializeField] private bool chaseOnSpawn = true;
 
         [Header("Combat Settings")] //
+        [SerializeField] private int attackDamage = 10;
         [SerializeField] private float attackCooldown = 2f;
-        [SerializeField] private int maxHealth = 100;
+        [SerializeField] private int maxHP = 100;
         [SerializeField] private AnimationClip deathAnimation;
 
-        private int _currentHealth;
+        private int _hp;
         private EnemyState _currentState = EnemyState.Idle;
         private bool _hasSeenPlayer;
         private bool _isDead;
         private float _lastAttackTime;
 
-        private void Awake() => _currentHealth = maxHealth;
+        private void Awake() => _hp = maxHP;
 
         private void Start()
         {
@@ -92,7 +93,7 @@ namespace Game.NPCs
 
         private void UpdateState()
         {
-            if (_currentHealth <= 0)
+            if (_hp <= 0)
             {
                 _currentState = EnemyState.Dead;
                 return;
@@ -201,12 +202,12 @@ namespace Game.NPCs
                 return;
             }
 
-            _currentHealth -= damage;
+            _hp -= damage;
             _hasSeenPlayer = true;
 
-            if (_currentHealth <= 0)
+            if (_hp <= 0)
             {
-                _currentHealth = 0;
+                _hp = 0;
                 _currentState = EnemyState.Dead;
             }
             else
@@ -215,10 +216,13 @@ namespace Game.NPCs
             }
         }
 
-        public void EmitAttackParticle()
-        {
-            shooter.Shoot(playerTransform.position, this.gameObject);
-        }
+        public void EmitAttackParticle() =>
+            shooter.Shoot(new ShootingArgs
+            {
+                targetPos = playerTransform.position,
+                originObject = gameObject,
+                damage = attackDamage
+            });
 
         private enum EnemyState
         {

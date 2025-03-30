@@ -33,6 +33,7 @@ namespace Game
 
         [Header("Combat")]
         [SerializeField] private int maxHP = 100;
+        [SerializeField] private int attackDamage = 10;
 
         // Animator IDs
         private static readonly int _speedId = Animator.StringToHash("Speed");
@@ -47,7 +48,11 @@ namespace Game
 
         public event Action OnPlayerDeath;
 
-        private void Awake() => _hitColliders = new Collider[10];
+        private void Awake()
+        {
+            _hitColliders = new Collider[10];
+            _hp = maxHP;
+        }
 
         private void FixedUpdate() => DoMovement();
 
@@ -211,7 +216,12 @@ namespace Game
             if (enemyToAttack)
                 enemyPosition = enemyToAttack.transform.position;
 
-            shooter.Shoot(enemyPosition, this.gameObject);
+            shooter.Shoot(new ShootingArgs
+            {
+                targetPos = enemyPosition,
+                originObject = gameObject,
+                damage = attackDamage
+            });
         }
 
         public GameObject LocateClosestEnemy()
