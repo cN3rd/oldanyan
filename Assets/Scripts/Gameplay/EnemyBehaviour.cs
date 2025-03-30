@@ -28,6 +28,7 @@ namespace Game.NPCs
         [Header("Combat Settings")] //
         [SerializeField] private float attackCooldown = 2f;
         [SerializeField] private int maxHealth = 100;
+        [SerializeField] private AnimationClip deathAnimation;
 
         private int _currentHealth;
         private EnemyState _currentState = EnemyState.Idle;
@@ -181,9 +182,9 @@ namespace Game.NPCs
                 agent.isStopped = true;
                 animator.SetTrigger(_dieID);
 
+                Destroy(gameObject, deathAnimation.length);
                 OnEnemyDeath?.Invoke(this);
                 enabled = false;
-                Destroy(gameObject, 5f);
             }
         }
 
