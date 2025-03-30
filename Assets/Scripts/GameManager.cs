@@ -40,10 +40,12 @@ namespace Game
 
             // Unforgivable, but we only do this once per level load
             var pauseMenuController = FindFirstObjectByType<PauseMenuUI>();
+            var actualPlayerController = FindFirstObjectByType<PlayerController>();
 
             // Events deregister automatically when the level is unloaded
             pauseMenuController.OnRestartClicked += RestartClicked;
             pauseMenuController.OnMainMenuClicked += ShowMainMenu;
+            actualPlayerController.OnPlayerDeath += RestartClicked;
         }
 
         private void OnLoadGame(int slot)

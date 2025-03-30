@@ -1,4 +1,5 @@
 using System;
+using Game.Gameplay.Shooting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,6 +16,7 @@ namespace Game.NPCs
 
         [SerializeField] private NavMeshAgent agent;
         [SerializeField] private Animator animator;
+        [SerializeField] private BulletShooter shooter;
 
         [Header("Target")] //
         [SerializeField] public Transform playerTransform;
@@ -214,7 +216,7 @@ namespace Game.NPCs
 
         public void EmitAttackParticle()
         {
-            Debug.Log("Player is attacked");
+            shooter.Shoot(playerTransform.position);
         }
 
         private enum EnemyState

@@ -6,6 +6,9 @@ namespace Game
     public class PickableWand : MonoBehaviour
     {
         [SerializeField] private Collider triggerCollider;
+        [SerializeField] private Transform shootPoint;
+
+        public Transform ShootPoint => shootPoint;
 
         private void OnTriggerEnter(Collider other)
         {

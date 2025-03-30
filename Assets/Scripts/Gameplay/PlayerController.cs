@@ -1,4 +1,5 @@
 using System;
+using Game.Gameplay.Shooting;
 using Game.Input;
 using Game.UI;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace Game
         [SerializeField] private Animator characterAnimator;
         [SerializeField] private InputState inputState;
         [SerializeField] private Transform handSocket;
+        [SerializeField] private BulletShooter shooter;
         private PickableWand _wand;
 
         [Header("Movement Controls")]
@@ -29,6 +31,9 @@ namespace Game
         [SerializeField] private LayerMask groundLayer;
         [SerializeField] private float groundCheckDistance = 0.1f;
 
+        [Header("Combat")]
+        [SerializeField] private int maxHP = 100;
+
         // Animator IDs
         private static readonly int _speedId = Animator.StringToHash("Speed");
         private static readonly int _jumpId = Animator.StringToHash("Jump");
@@ -37,6 +42,9 @@ namespace Game
         private Vector3 _horizontalVelocity = Vector3.zero;
         private Vector3 _moveDirection = Vector3.zero;
         private float _pitch, _yaw;
+        private int _hp;
+
+        public event Action OnPlayerDeath;
 
         private void FixedUpdate() => DoMovement();
 
@@ -182,9 +190,29 @@ namespace Game
             characterAnimator.SetTrigger(_attackId);
         }
 
+        public void OnDrawGizmos()
+        {
+            if (_wand)
+            {
+                Gizmos.DrawLine(_wand.ShootPoint.position, playerPivotTransform.forward * 100);
+            }
+        }
+
         public void EmitAttackParticle()
         {
             Debug.Log("Attacking...");
+            shooter.startNodeTrans = _wand.ShootPoint;
+            shooter.Shoot(playerPivotTransform.forward * 100f);
+        }
+
+        public void TakeDamage(int damageHP)
+        {
+            _hp = Mathf.Clamp(_hp - damageHP, 0, maxHP);
+            if (_hp == 0)
+            {
+                Debug.Log("Player died");
+                OnPlayerDeath?.Invoke();
+            }
         }
     }
 }

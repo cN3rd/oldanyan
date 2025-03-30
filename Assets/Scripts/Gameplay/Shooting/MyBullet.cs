@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Game.Gameplay.Shooting
@@ -19,6 +20,8 @@ namespace Game.Gameplay.Shooting
         public AudioClip bulletClip;
         public AudioClip onHitClip;
 
+        [NonSerialized] public GameObject origin;
+
         // Reference to the audio source (assigned in prefab)
         [HideInInspector] public AudioSource audioSource;
 
@@ -33,7 +36,7 @@ namespace Game.Gameplay.Shooting
 
         private void Update()
         {
-            if (isTargeting && target != null)
+            if (isTargeting && target)
             {
                 cachedTransform.forward = Vector3.RotateTowards(cachedTransform.forward,
                     target.position - cachedTransform.position, rotSpeed * Time.deltaTime, 0.0f);
@@ -44,12 +47,15 @@ namespace Game.Gameplay.Shooting
 
         private void OnTriggerEnter(Collider other)
         {
-            // Use the prefab-based approach
+            if (!other.CompareTag("Enemy") || !other.CompareTag("Player")) return;
+            if (other.gameObject == origin) return;
+
+            Debug.Log("Actual hit!");
+
             if (useHitPrefab && onHitEffectPrefab != null)
             {
                 Instantiate(onHitEffectPrefab, cachedTransform.position, Quaternion.identity);
             }
-            // Fall back to original approach if prefab reference is missing
             else if (onHitEffect != null)
             {
                 Instantiate(onHitEffect, cachedTransform.position, Quaternion.identity);
