@@ -237,6 +237,7 @@ MonoBehaviour:
   chaseOnSpawn: 1
   attackCooldown: 2
   maxHealth: 100
+  deathAnimation: {fileID: -203655887218126122, guid: 6b1cf4fa1db48fe4a9edcfc01faaf488, type: 3}
 --- !u!114 &1277481176542646308
 MonoBehaviour:
   m_ObjectHideFlags: 0
