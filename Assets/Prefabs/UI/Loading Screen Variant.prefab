@@ -127,8 +127,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 960, y: -95}
-  m_SizeDelta: {x: 320.33, y: 100}
+  m_AnchoredPosition: {x: 944.5, y: -95}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8127184198078832253
 MonoBehaviour:
@@ -468,7 +468,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 191.76999, y: -50}
-  m_SizeDelta: {x: 257.12, y: 100}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7027656157814037227
 CanvasRenderer:
@@ -996,6 +996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 1365505577272954510}
+  initialSelectable: {fileID: 0}
   progressSlider: {fileID: 7359851638814385411}
   tipsCollection: {fileID: 11400000, guid: bc76e486316c9f64aa54ed17e37c0486, type: 2}
   tipTextCanvasGroup: {fileID: 1685443133973089022}
